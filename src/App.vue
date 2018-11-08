@@ -1,23 +1,26 @@
 <template>
-  <div id="app">
-    <img src="~@/assets/logo.png">
-    <router-view/>
+  <div class="cs--cyan container">
+    <a href="#main" class="skiplink">Overslaan en naar de inhoud gaan</a>
+    <v-header/>
+    <main id="main">
+      <section class="content-container">
+        <router-view/>
+      </section>
+    </main>
+    <v-footer/>
   </div>
 </template>
 
 <script>
+import vHeader from './components/organisms/header'
+import vFooter from './components/organisms/footer'
+import './assets/sass/main.scss'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: { 'v-header': vHeader, 'v-footer': vFooter }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

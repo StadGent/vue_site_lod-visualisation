@@ -1,0 +1,32 @@
+.search {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  align-items: center;
+
+  label {
+    @extend %h3;
+
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input {
+    margin-bottom: .5rem;
+  }
+
+  input[type="search"] {
+    flex: 1 1 $bp-mobile;
+    margin-right: .4rem;
+    padding-left: 2.4rem;
+    background: svg-as-background('search', color('dark-gray'), 32, 32) no-repeat left .4rem center;
+
+    &:focus {
+      background: svg-as-background('search', color('dark-gray'), 32, 32) no-repeat left .4rem center;
+    }
+  }
+
+  input[type="submit"] {
+    @include button-large;
+  }
+}

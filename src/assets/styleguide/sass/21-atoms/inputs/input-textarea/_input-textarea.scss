@@ -1,0 +1,9 @@
+textarea {
+  @include field-base;
+
+  height: auto;
+  min-height: 7.2rem;
+  padding-top: .7rem;
+  padding-bottom: .7rem;
+  resize: none;
+}
