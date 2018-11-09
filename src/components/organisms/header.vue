@@ -2,6 +2,7 @@
   <header class="header">
     <div class="content-container">
       <logo/>
+      <v-menu/>
     </div>
     <breadcrumbs/>
     <hr>
@@ -16,8 +17,9 @@
 <script>
 import logo from '../molecules/logo'
 import breadcrumbs from '../molecules/breadcrumbs'
+import menu from '../molecules/menu'
 
 export default {
-  components: {logo, breadcrumbs}
+  components: {logo, breadcrumbs, 'v-menu': menu}
 }
 </script>

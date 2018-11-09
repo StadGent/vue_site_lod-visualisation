@@ -11,21 +11,23 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      title: 'Home'
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/datasets',
+      name: 'datasets',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      component: () => import(/* webpackChunkName: "datasets" */ './views/Datasets.vue'),
       meta: {
         breadcrumb: [
           {name: 'Home', link: 'home'},
-          {name: 'About'}
+          {name: 'Datasets'}
         ]
-      }
+      },
+      title: 'Datasets'
     },
     {
       path: '/404',
