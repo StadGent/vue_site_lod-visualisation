@@ -2,10 +2,8 @@
   <div class="cs--cyan container">
     <a href="#main" class="skiplink">Overslaan en naar de inhoud gaan</a>
     <v-header/>
-    <main id="main">
-      <section class="content-container">
-        <router-view/>
-      </section>
+    <main id="main" class="content-container">
+      <router-view/>
     </main>
     <v-footer/>
   </div>

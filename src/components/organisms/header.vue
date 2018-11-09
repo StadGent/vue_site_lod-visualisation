@@ -3,11 +3,11 @@
     <div class="content-container">
       <logo/>
     </div>
-    <breadcrumbs v-if="hasBreadcrumbs"/>
+    <breadcrumbs/>
     <hr>
 
     <div class="subsite">
-      <span>Linked Open Data</span>
+      <span>{{ $store.state.projectName }}</span>
     </div>
 
   </header>
@@ -18,14 +18,6 @@ import logo from '../molecules/logo'
 import breadcrumbs from '../molecules/breadcrumbs'
 
 export default {
-  components: {logo, breadcrumbs},
-  computed: {
-    hasBreadcrumbs () {
-      return (
-        (this.$store.state.breadcrumbs &&
-            this.$store.state.breadcrumbs.length > 0) === true
-      )
-    }
-  }
+  components: {logo, breadcrumbs}
 }
 </script>
