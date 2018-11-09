@@ -1,1 +1,0 @@
-"use strict";!function(){if(Modal)for(var o=document.querySelectorAll(".modal:not(.has-custom-binding)"),n=o.length;n--;)new Modal(o[n])}();
