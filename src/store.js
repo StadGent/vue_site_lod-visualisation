@@ -42,6 +42,11 @@ export default new Vuex.Store({
         config: {headers: {'accept': 'application/sparql-results+json'}}
       })
         .then(response => response.data.results.bindings)
+        .then(datasets => datasets.map(set => {
+            set.btoa = btoa(set.dataset.value)
+            return set
+          })
+        )
         .then(datasets => commit('SET_DATASETS', datasets))
     }
   }
