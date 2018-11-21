@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <section class="detail-layout">
         <div v-if="dataset">
             <h1>{{ dataset.title.value }}</h1>
-            <div>{{ dataset }}</div>
+            <p>{{ dataset.description.value }}</p>
         </div>
-    </div>
+    </section>
 
 </template>
 
