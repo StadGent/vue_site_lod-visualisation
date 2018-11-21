@@ -7,15 +7,19 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     projectName: 'Linked Open Data',
-    datasets: []
+    datasets: [],
+    details: {}
   },
   mutations: {
     SET_DATASETS (state, data) {
       state.datasets = data
+    },
+    SET_DATASET (state, data) {
+      state.details[data.id] = data
     }
   },
   actions: {
-    fetchDataSets ({commit}) {
+    async fetchDataSets ({commit}) {
 
       // only fetch datasets once
       if (this.state.datasets.length) {
@@ -35,19 +39,53 @@ export default new Vuex.Store({
       let formData = new FormData()
       formData.set('query', query)
 
-      axios({
+      let response = await axios({
         method: 'post',
         url: 'https://stad.gent/sparql',
         data: formData,
         config: {headers: {'accept': 'application/sparql-results+json'}}
       })
-        .then(response => response.data.results.bindings)
-        .then(datasets => datasets.map(set => {
-            set.btoa = btoa(set.dataset.value)
-            return set
-          })
-        )
-        .then(datasets => commit('SET_DATASETS', datasets))
+
+      response = response.data.results.bindings
+      response.map(dataset => {
+        dataset.btoa = btoa(dataset.dataset.value)
+        return btoa
+      })
+
+      commit('SET_DATASETS', response)
+    },
+    async fetchDataSet ({commit}, id) {
+
+      // only fetch dataset once
+      if (this.state.details[id]) {
+        return
+      }
+
+      const query =
+        `
+          PREFIX dcat:    <http://www.w3.org/ns/dcat#>
+          PREFIX dcterms: <http://purl.org/dc/terms/>
+          SELECT ?title ?description
+          FROM <http://stad.gent/dcat/linked-data/>
+          WHERE {
+             <${atob(id)}> a dcat:Dataset;
+                      dcterms:title ?title;
+                      dcterms:description ?description.
+          }
+    `
+      let formData = new FormData()
+      formData.set('query', query)
+
+      let response = await axios({
+        method: 'post',
+        url: 'https://stad.gent/sparql',
+        data: formData,
+        config: {headers: {'accept': 'application/sparql-results+json'}}
+      })
+
+      response = response.data.results.bindings[0]
+      response.id = id
+      commit('SET_DATASET', response)
     }
   }
 })
