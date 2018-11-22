@@ -7,29 +7,29 @@ export async function fetchDataSet ({commit}, id) {
     return
   }
 
+  const instance = axios.create({
+    transformRequest: [
+      (data, headers) => {
+        headers.common.Accept = 'application/sparql-results+json'
+        return data
+      },
+    ]
+  })
+
   const query =
     `
-          PREFIX dcat:    <http://www.w3.org/ns/dcat#>
-          PREFIX dcterms: <http://purl.org/dc/terms/>
-          SELECT ?title ?description
-          FROM <http://stad.gent/dcat/linked-data/>
-          WHERE {
-             <${atob(id)}> a dcat:Dataset;
-                      dcterms:title ?title;
-                      dcterms:description ?description.
-          }
+    DESCRIBE <${atob(id)}>
     `
   let formData = new FormData()
   formData.set('query', query)
 
-  let response = await axios({
+  let response = await instance({
     method: 'post',
-    url: 'https://stad.gent/sparql',
+    url: 'https://qa.stad.gent/sparql',
     data: formData,
-    config: {headers: {'accept': 'application/sparql-results+json'}}
   })
 
-  response = response.data.results.bindings[0]
+  response = response.data.results.bindings
   response.id = id
   commit('SET_DATASET', response)
 }

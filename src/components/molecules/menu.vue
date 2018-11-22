@@ -9,7 +9,10 @@
             </div>
             <ul class="links">
                 <li v-for="(route, index) in routes" :key="index">
-                    <router-link :to="route" active-class="active" :exact="!route.path.length" @click.native="menu.close()">{{ route.title }}
+                    <router-link :to="route"
+                                 active-class="active"
+                                 :exact="route.path === '' || route.path === '/'"
+                                 @click.native="menu.close()">{{ route.title }}
                     </router-link>
                 </li>
             </ul>

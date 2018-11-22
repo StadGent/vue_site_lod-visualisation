@@ -22,7 +22,7 @@ export async function fetchDataSets ({commit}) {
 
   let response = await axios({
     method: 'post',
-    url: 'https://stad.gent/sparql',
+    url: 'https://qa.stad.gent/sparql',
     data: formData,
     config: {headers: {'accept': 'application/sparql-results+json'}}
   })
