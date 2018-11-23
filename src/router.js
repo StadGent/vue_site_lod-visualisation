@@ -7,6 +7,9 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  },
   routes: [
     {
       path: '/',
@@ -15,19 +18,45 @@ export default new Router({
       title: 'Home'
     },
     {
+      path: '/home',
+      redirect: '/'
+    },
+    {
       path: '/datasets',
-      name: 'datasets',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "datasets" */ './views/Datasets.vue'),
-      meta: {
-        breadcrumb: [
-          {name: 'Home', link: 'home'},
-          {name: 'Datasets'}
-        ]
-      },
-      title: 'Datasets'
+      title: 'Datasets',
+      children: [
+        {
+          path: '',
+          component: () => import(/* webpackChunkName: "datasets" */ './views/Datasets_index.vue'),
+          name: 'datasets_index',
+          meta: {
+            breadcrumb: [
+              {name: 'Home', link: 'home'},
+              {name: 'Datasets'}
+            ]
+          }
+        },
+        {
+          path: ':id',
+          name: 'datasets_show',
+          component: () => import(/* webpackChunkName: "datasets" */ './views/Datasets_show.vue'),
+          meta: {
+            breadcrumb: [
+              {name: 'Home', link: 'home'},
+              {name: 'Datasets', link: 'datasets_index'},
+              {name: ':id'}
+            ]
+          }
+        },
+        {
+          path: 'index',
+          redirect: './'
+        },
+      ]
     },
     {
       path: '/404',

@@ -9,7 +9,11 @@
             </div>
             <ul class="links">
                 <li v-for="(route, index) in routes" :key="index">
-                    <router-link :to="route" active-class="active" exact>{{ route.title }}</router-link>
+                    <router-link :to="route"
+                                 active-class="active"
+                                 :exact="route.path === '' || route.path === '/'"
+                                 @click.native="menu.close()">{{ route.title }}
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -18,10 +22,18 @@
 
 <script>
   export default {
+    data () {
+      return {
+        menu: null
+      }
+    },
     computed: {
       routes: function () {
-        return this.$router.options.routes.filter(route => route.title ) || []
+        return this.$router.options.routes.filter(route => route.title) || []
       }
+    },
+    mounted () {
+      this.menu = new this.$menu(this.$el)
     }
   }
 </script>
