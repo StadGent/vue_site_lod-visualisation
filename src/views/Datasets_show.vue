@@ -50,9 +50,9 @@
         this.dataset = this.details[this.$route.params.id]
         this.dataset = this.dataset.reduce((acc, triple) => {
           const p = triple.p.value
-          let pieces = p.split('/')
-          let shortName = pieces[pieces.length - 1].split('#')
-          shortName = shortName[shortName.length - 1]
+          let lastIndex = p.lastIndexOf('#') > -1 ? p.lastIndexOf('#') : p.lastIndexOf('/')
+          let shortName = p.substr(lastIndex + 1)
+          let namespace = p.substring(0, lastIndex + 1)
 
           if (!acc[shortName]) {
             acc[shortName] = []
