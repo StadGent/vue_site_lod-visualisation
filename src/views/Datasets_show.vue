@@ -92,4 +92,8 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+
+    .dataset dd {
+        white-space: pre-wrap;
+    }
 </style>
