@@ -1940,6 +1940,10 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
+codemirror@5.17.0:
+  version "5.17.0"
+  resolved "http://registry.npmjs.org/codemirror/-/codemirror-5.17.0.tgz#a9431353373f152fe2851f29502a3aa12c1d6247"
+
 collection-visit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/collection-visit/-/collection-visit-1.0.0.tgz#4bc0373c164bc3291b4d368c829cf1a80a59dca0"
@@ -4742,6 +4746,10 @@ joi@^13.0.0:
     isemail "3.x.x"
     topo "3.x.x"
 
+jquery@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
+
 js-base64@^2.1.8:
   version "2.4.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.9.tgz#748911fb04f48a60c4771b375cac45a80df11c03"
@@ -6692,6 +6700,10 @@ prettier@1.13.7:
   version "1.13.7"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.7.tgz#850f3b8af784a49a6ea2d2eaa7ed1428a34b7281"
 
+prettier@^1.4.4:
+  version "1.15.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.3.tgz#1feaac5bdd181237b54dbe65d874e02a1472786a"
+
 pretty-error@^2.0.2:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/pretty-error/-/pretty-error-2.1.1.tgz#5f4f87c8f91e5ae3f3ba87ab4cf5e03b1a17f1a3"
@@ -7809,6 +7821,10 @@ stdout-stream@^1.4.0:
 stealthy-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
+
+store@^2.0.4:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/store/-/store-2.0.12.tgz#8c534e2a0b831f72b75fc5f1119857c44ef5d593"
 
 stream-browserify@^2.0.1:
   version "2.0.1"
@@ -9001,6 +9017,21 @@ yargs@~3.5.4:
     decamelize "^1.0.0"
     window-size "0.1.0"
     wordwrap "0.0.2"
+
+yasgui-utils@^1.6.7:
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/yasgui-utils/-/yasgui-utils-1.6.7.tgz#2bcfc5a315688de3ae6057883d9ae342b205f267"
+  dependencies:
+    store "^2.0.4"
+
+yasgui-yasqe@^2.11.22:
+  version "2.11.22"
+  resolved "https://registry.yarnpkg.com/yasgui-yasqe/-/yasgui-yasqe-2.11.22.tgz#6da6cc234157924e986cc566f319b09519edd5f3"
+  dependencies:
+    codemirror "5.17.0"
+    jquery "^2.2.4"
+    prettier "^1.4.4"
+    yasgui-utils "^1.6.7"
 
 yauzl@2.4.1:
   version "2.4.1"
