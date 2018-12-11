@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     projectName: 'Linked Open Data',
     datasets: [],
-    details: {}
+    details: {},
+    a11yMessage: null
   },
   mutations: {
     SET_DATASETS (state, data) {
@@ -17,10 +18,16 @@ export default new Vuex.Store({
     },
     SET_DATASET (state, data) {
       state.details[data.id] = data
+    },
+    SET_A11YMESSAGE (state, data) {
+      state.a11yMessage = data
     }
   },
   actions: {
     fetchDataSets,
-    fetchDataSet
+    fetchDataSet,
+    setA11yMessage({commit}, message) {
+      commit('SET_A11YMESSAGE', message)
+    }
   }
 })

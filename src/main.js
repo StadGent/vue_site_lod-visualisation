@@ -18,12 +18,20 @@ require('@/assets/styleguide/js/base.js')
 Vue.prototype.$menu = Menu;
 
 router.beforeEach((to, from, next) => {
+  let title
   if (to.meta && to.meta.title) {
-    document.title = `${to.meta.title} | LOD`
+    title = to.meta.title
   }
-  else {
-    document.title = 'Linked Open Data'
-  }
+
+  // update document title
+  document.title = title ? `${title} | LOD` : 'Linked Open Data'
+
+  // set a11yMessage
+  // delay to give assistive technology some time
+  setTimeout(function () {
+    store.dispatch('setA11yMessage', `pagina ${title ? title : ''} geladen`)
+  }, 200)
+
   next()
 })
 
