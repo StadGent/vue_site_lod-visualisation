@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { fetchDataSets } from './store-actions/fetch-data-sets'
-import { fetchDataSet } from './store-actions/fetch-data-set'
+import { fetchDataSets } from './actions/fetch-data-sets'
+import { fetchDataSet } from './actions/fetch-data-set'
 
 Vue.use(Vuex)
 
