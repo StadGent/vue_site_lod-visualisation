@@ -1,8 +1,10 @@
 <template>
+    <transition name="fade">
     <section class="detail-layout" v-if="dataset">
         <h1>{{title}}</h1>
         <datadl :resource="dataset" :id="id"></datadl>
     </section>
+    </transition>
 </template>
 
 <script>
@@ -27,7 +29,13 @@
     ]),
     methods: {
       async fetchData () {
-        await this.$store.dispatch('fetchDataSet', this.$route.params.id)
+
+        try {
+          await this.$store.dispatch('fetchDataSet', this.$route.params.id)
+        } catch (err) {
+          return this.$router.push({name: '404'})
+        }
+
         this.dataset = this.details[this.$route.params.id]
         this.id = this.dataset.id
         this.dataset = this.dataset.reduce(this.tripleReducer, {})

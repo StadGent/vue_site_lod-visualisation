@@ -1,8 +1,10 @@
 <template>
-    <section class="detail-layout" v-if="this.dataset">
-        <h1>{{title}}</h1>
-        <datadl :resource="dataset" :id="id"></datadl>
-    </section>
+    <transition name="fade">
+        <section class="detail-layout" v-if="this.dataset">
+            <h1>{{title}}</h1>
+            <datadl :resource="dataset" :id="id"></datadl>
+        </section>
+    </transition>
 </template>
 
 <script>
