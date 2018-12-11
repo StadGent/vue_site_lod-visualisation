@@ -1,46 +1,42 @@
 <template>
-    <section class="detail-layout" v-if="dataset">
+    <section class="detail-layout" v-if="this.dataset">
         <h1>{{title}}</h1>
         <datadl :resource="dataset" :id="id"></datadl>
     </section>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+
+  import { fetchResource } from '../actions/fetch-data-resource'
   import datadl from '../components/organisms/datadl'
   import { detailPageMixin } from '../mixins/detail-page.mixin'
 
   export default {
-    components: { datadl },
+    components: {datadl},
     mixins: [detailPageMixin],
     data () {
       return {
         dataset: null,
-        crumbs: null,
         title: null,
         id: null
       }
     },
-    computed: mapState([
-      'datasets',
-      'details'
-    ]),
+    watch: {
+      '$route': 'fetchData'
+    },
     methods: {
       async fetchData () {
-        await this.$store.dispatch('fetchDataSet', this.$route.params.id)
-        this.dataset = this.details[this.$route.params.id]
+        try {
+          this.dataset = await fetchResource(this.$route.path)
+        }
+        catch (err) {
+          return this.$router.push({name: '404'})
+        }
+
         this.id = this.dataset.id
         this.dataset = this.dataset.reduce(this.tripleReducer, {})
         this.title = this.getTitle()
-        this.setCrumbs()
-      },
-      setCrumbs() {
-        this.crumbs = this.$route.meta.breadcrumb
-        this.crumbs[this.crumbs.length - 1].name = this.title
       }
-    },
-    destroyed () {
-      this.crumbs[this.crumbs.length - 1].name = ''
     }
   }
 </script>

@@ -1,0 +1,24 @@
+.dataset {
+  a.uri {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+  }
+
+  dd {
+    white-space: pre-wrap;
+
+    a::after {
+      content: none;
+    }
+  }
+
+  dt .predicate {
+    @include theme('color', 'color-tertiary--lighten-1', 'dataset-color');
+
+    font-weight: normal;
+  }
+}
