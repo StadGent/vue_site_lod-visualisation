@@ -8,7 +8,7 @@
         <h2 class="visually-hidden">Overview</h2>
         <ul class="grid-3">
             <li class="teaser teaser-topic"
-                v-for="(dataset, index) in datasets"
+                v-for="(dataset, index) in paginatedItems"
                 :key="`dataset-${index}`">
                 <article class="teaser-content">
                     <div class="content__bottom">
@@ -22,16 +22,46 @@
                              class="teaser-overlay-link" tabindex="-1" aria-hidden="true"></router-link>
             </li>
         </ul>
+        <pagination
+                :total="totalPages"
+                :active="currentPage">
+        </pagination>
     </section>
 </template>
 
 <script>
   import { mapState } from 'vuex'
+  import pagination from '../components/molecules/pagination'
 
   export default {
-    computed: mapState([
-      'datasets'
-    ]),
+    components: {pagination},
+    data() {
+      return {
+        itemsPerPage: 12
+      }
+    },
+    computed: {
+      ...mapState([
+                 'datasets'
+               ]),
+      totalPages() {
+        return Math.ceil(this.datasets.length / this.itemsPerPage)
+      },
+      paginatedItems() {
+        const index = this.currentPage * this.itemsPerPage - this.itemsPerPage
+        return this.datasets.slice(index, index + this.itemsPerPage)
+      },
+      currentPage() {
+        const queryPage = this.$route.query.page || 1
+        if (queryPage <= 0 || isNaN(queryPage)) {
+          return 1
+        }
+        if (queryPage > this.totalPages) {
+          return this.totalPages
+        }
+        return +queryPage
+      },
+    },
     created () {
       this.fetchData()
     },
