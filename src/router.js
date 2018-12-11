@@ -15,7 +15,9 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
-      title: 'Home'
+      meta: {
+        menu: 'Home'
+      }
     },
     {
       path: '/home',
@@ -27,13 +29,17 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "datasets" */ './views/Datasets.vue'),
-      title: 'Datasets',
+      meta: {
+        menu: 'Datasets',
+        title: 'Datasets',
+      },
       children: [
         {
           path: '',
           component: () => import(/* webpackChunkName: "datasets" */ './views/Datasets_index.vue'),
           name: 'datasets_index',
           meta: {
+            title: 'Datasets',
             breadcrumb: [
               {name: 'Home', link: 'home'},
               {name: 'Datasets'}
@@ -45,6 +51,7 @@ export default new Router({
           name: 'datasets_show',
           component: () => import(/* webpackChunkName: "datasets" */ './views/Datasets_show.vue'),
           meta: {
+            title: 'Detail',
             breadcrumb: [
               {name: 'Home', link: 'home'},
               {name: 'Datasets', link: 'datasets_index'},
@@ -71,7 +78,10 @@ export default new Router({
     },
     {
       path: '*',
-      component: () => import(/* webpackChunkName: "data-resource" */ './views/Data-resource.vue')
+      component: () => import(/* webpackChunkName: "data-resource" */ './views/Data-resource.vue'),
+      meta: {
+        title: 'Detail'
+      }
     }
   ]
 })

@@ -1,8 +1,10 @@
 <template>
-    <section class="detail-layout" v-if="this.dataset">
-        <h1>{{title}}</h1>
-        <datadl :resource="dataset" :id="id"></datadl>
-    </section>
+    <transition name="fade">
+        <section class="detail-layout" v-if="this.dataset">
+            <h1>{{title}}</h1>
+            <datadl :resource="dataset" :id="id"></datadl>
+        </section>
+    </transition>
 </template>
 
 <script>
@@ -35,7 +37,7 @@
 
         this.id = this.dataset.id
         this.dataset = this.dataset.reduce(this.tripleReducer, {})
-        this.title = this.getTitle()
+        this.setTitle()
       }
     }
   }

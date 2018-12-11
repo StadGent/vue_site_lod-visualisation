@@ -1,5 +1,5 @@
 <template>
-    <nav class="menu" v-if="routes.length">
+    <nav class="menu" v-if="routes">
         <button class="toggle">Menu</button>
         <div class="overlay"></div>
         <div class="drawer" tabindex="-1">
@@ -12,7 +12,7 @@
                     <router-link :to="route"
                                  active-class="active"
                                  :exact="route.path === '' || route.path === '/'"
-                                 @click.native="menu.close()">{{ route.title }}
+                                 @click.native="menu.close()">{{ route.meta.menu }}
                     </router-link>
                 </li>
             </ul>
@@ -29,7 +29,7 @@
     },
     computed: {
       routes: function () {
-        return this.$router.options.routes.filter(route => route.title) || []
+        return this.$router.options.routes.filter(route => route.meta && route.meta.menu) || []
       }
     },
     mounted () {

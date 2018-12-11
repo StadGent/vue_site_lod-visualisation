@@ -6,17 +6,22 @@
       <router-view/>
     </main>
     <v-footer/>
+    <div role="status" aria-atomic="true" aria-live="polite" class="visually-hidden">{{ a11yMessage }}</div>
   </div>
 </template>
 
 <script>
 import vHeader from './components/organisms/header'
 import vFooter from './components/organisms/footer'
+import { mapState } from 'vuex'
 import './assets/sass/main.scss'
 
 export default {
   name: 'App',
-  components: { 'v-header': vHeader, 'v-footer': vFooter }
+  components: { 'v-header': vHeader, 'v-footer': vFooter },
+  computed: mapState([
+    'a11yMessage'
+  ]),
 }
 </script>
 

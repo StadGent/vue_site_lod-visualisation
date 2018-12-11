@@ -19,18 +19,11 @@ export async function fetchResource (id) {
   let formData = new FormData()
   formData.set('query', query)
 
-  let response
-
-  try {
-    response = await instance({
-      method: 'post',
-      url: 'https://qa.stad.gent/sparql',
-      data: formData,
-    })
-  }
-  catch (e) {
-    throw e
-  }
+  let response = await instance({
+    method: 'post',
+    url: 'https://qa.stad.gent/sparql',
+    data: formData,
+  })
 
   response = response.data.results.bindings
   response.id = id
@@ -39,5 +32,5 @@ export async function fetchResource (id) {
     throw new Error('404')
   }
 
-  return response;
+  return response
 }
