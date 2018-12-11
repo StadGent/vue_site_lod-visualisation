@@ -39,7 +39,7 @@
         this.dataset = this.details[this.$route.params.id]
         this.id = this.dataset.id
         this.dataset = this.dataset.reduce(this.tripleReducer, {})
-        this.title = this.getTitle()
+        await this.setTitle()
         this.setCrumbs()
       },
       setCrumbs() {

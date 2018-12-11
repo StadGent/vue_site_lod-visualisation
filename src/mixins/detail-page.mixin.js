@@ -15,6 +15,10 @@ export const detailPageMixin = {
       }
       return 'detail view'
     },
+    async setTitle () {
+      this.title = await this.getTitle()
+      document.title = `${this.title} | LOD`
+    },
     tripleReducer(acc, triple) {
       const p = triple.p.value
       let lastIndex = p.lastIndexOf('#') > -1 ? p.lastIndexOf('#') : p.lastIndexOf('/')

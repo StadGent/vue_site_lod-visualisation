@@ -37,7 +37,7 @@
 
         this.id = this.dataset.id
         this.dataset = this.dataset.reduce(this.tripleReducer, {})
-        this.title = this.getTitle()
+        this.setTitle()
       }
     }
   }

@@ -17,6 +17,16 @@ require('@/assets/styleguide/js/base.js')
 
 Vue.prototype.$menu = Menu;
 
+router.beforeEach((to, from, next) => {
+  if (to.meta && to.meta.title) {
+    document.title = `${to.meta.title} | LOD`
+  }
+  else {
+    document.title = 'Linked Open Data'
+  }
+  next()
+})
+
 new Vue({
   router,
   store,
