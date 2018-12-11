@@ -3681,9 +3681,9 @@ gaze@^1.0.0:
   dependencies:
     globule "^1.0.0"
 
-gent_styleguide@^3.0.0-alpha.9:
-  version "3.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/gent_styleguide/-/gent_styleguide-3.0.0-alpha.9.tgz#86ef7b9088aa1c23626729ca24b70a949977e796"
+gent_styleguide@^3.0.0-alpha.10:
+  version "3.0.0-alpha.10"
+  resolved "https://registry.yarnpkg.com/gent_styleguide/-/gent_styleguide-3.0.0-alpha.10.tgz#3cc7c785b0d3e3f336e7e1452d623d043178ec7a"
   dependencies:
     baguettebox.js "https://github.com/BartDelrue/baguetteBox.js.git"
     breakpoint-sass "^2.7.1"
