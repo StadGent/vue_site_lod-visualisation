@@ -31,5 +31,11 @@
   }
 </script>
 
-<style>
+<style scoped>
+    @import "~yasgui-yasqe/dist/yasqe.min.css";
+
+    /* Issue logged for yasgui-yasr,
+    ** import not possible due to relative modules not found.
+    ** @import "~yasgui-yasr/dist/yasr.min.css";
+    */
 </style>
