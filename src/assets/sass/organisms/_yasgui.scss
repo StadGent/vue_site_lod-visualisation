@@ -1,0 +1,28 @@
+@include desktop {
+  @include set-layout('width-10', 'offset-1');
+}
+
+#yasqe, #yasr {
+  font-size: .6rem;
+
+  @include desktop {
+    @include set-layout('width-10', 'offset-1');
+  }
+
+  a {
+    font-weight: normal;
+    &::after {
+      content: none;
+    }
+  }
+}
+
+#yasr {
+  overflow: auto;
+
+  .yasr_header {
+    > button:last-of-type {
+      display: none;
+    }
+  }
+}

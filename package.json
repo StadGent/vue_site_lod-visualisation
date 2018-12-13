@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "google": "^2.1.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "yasgui-yasqe": "^2.11.22",
+    "yasgui-yasr": "^2.12.19"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
