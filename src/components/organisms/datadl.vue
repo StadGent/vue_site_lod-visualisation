@@ -13,16 +13,16 @@
                            :href="getDataUri(triple)">
                             {{getDataUri(triple)}}
                         </a>
-                        <span v-else>{{isSubject(triple.o) ? triple.s.value : triple.o.value}}</span>
+                        <div v-else v-html="getMarkdown(triple)"></div>
                     </li>
                 </ul>
-                <div v-else v-for="(triple, index) in resource[key]" :key="`${key}-${index}`">
-                    <a class="uri" v-if="isUri(triple.o)"
+                <template v-else v-for="(triple, index) in resource[key]">
+                    <a class="uri" v-if="isUri(triple.o)" :key="`${key}-${index}`"
                        :href="getDataUri(triple)">
                         {{getDataUri(triple)}}
                     </a>
-                    <div v-else v-html="getMarkdown(triple)"></div>
-                </div>
+                    <div v-else v-html="getMarkdown(triple)" :key="`${key}-${index}`"></div>
+                </template>
             </dd>
         </template>
     </dl>

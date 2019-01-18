@@ -8,6 +8,10 @@ dl.dataset {
 
   dd {
 
+    li>div>p:only-child {
+      margin: 0;
+    }
+
     a.uri {
       display: inline-block;
       max-width: 100%;
