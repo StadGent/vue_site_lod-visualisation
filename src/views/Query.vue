@@ -17,7 +17,7 @@
       let yasqe = YASQE(document.querySelector('#yasqe'), {
         sparql: {
           showQueryButton: true,
-          endpoint: 'https://qa.stad.gent/sparql'
+          endpoint: process.env.VUE_APP_SPARQL_ENDPOINT
         }
       })
       let yasr = YASR(document.querySelector('#yasr'), {
