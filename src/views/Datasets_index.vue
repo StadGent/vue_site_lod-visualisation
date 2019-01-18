@@ -76,7 +76,7 @@
           await this.$store.dispatch('fetchDataSets')
         }
         catch (err) {
-          return this.$router.push({name: '404'})
+          return this.$router.replace({name: '404'})
         }
       }
     }

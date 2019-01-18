@@ -32,7 +32,7 @@
           this.dataset = await fetchResource(this.$route.path)
         }
         catch (err) {
-          return this.$router.push({name: '404'})
+          return this.$router.replace({name: '404'})
         }
 
         this.id = this.dataset.id

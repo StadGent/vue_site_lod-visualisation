@@ -33,7 +33,7 @@
         try {
           await this.$store.dispatch('fetchDataSet', this.$route.params.id)
         } catch (err) {
-          return this.$router.push({name: '404'})
+          return this.$router.replace({name: '404'})
         }
 
         this.dataset = this.details[this.$route.params.id]
@@ -48,7 +48,9 @@
       }
     },
     destroyed () {
-      this.crumbs[this.crumbs.length - 1].name = ''
+      if (this.crumbs) {
+        this.crumbs[this.crumbs.length - 1].name = ''
+      }
     }
   }
 </script>
