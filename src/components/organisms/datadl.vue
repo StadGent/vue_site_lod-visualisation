@@ -10,18 +10,18 @@
                 <ul v-if="resource[key].length > 1">
                     <li v-for="(triple, index) in resource[key]" :key="`${key}-${index}`">
                         <a class="uri" v-if="isUri(triple.o)"
-                           :href="isSubject(triple.o) ? triple.s.value : triple.o.value">
-                            {{isSubject(triple.o) ? triple.s.value : triple.o.value}}
+                           :href="getDataUri(triple)">
+                            {{getDataUri(triple)}}
                         </a>
                         <span v-else>{{isSubject(triple.o) ? triple.s.value : triple.o.value}}</span>
                     </li>
                 </ul>
                 <div v-else v-for="(triple, index) in resource[key]" :key="`${key}-${index}`">
                     <a class="uri" v-if="isUri(triple.o)"
-                       :href="isSubject(triple.o) ? triple.s.value : triple.o.value">
-                        {{isSubject(triple.o) ? triple.s.value : triple.o.value}}
+                       :href="getDataUri(triple)">
+                        {{getDataUri(triple)}}
                     </a>
-                    <span v-else>{{isSubject(triple.o) ? triple.s.value : triple.o.value}}</span>
+                    <div v-else v-html="getMarkdown(triple)"></div>
                 </div>
             </dd>
         </template>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+  import * as markdown from 'markdown'
+
   export default {
     props: {
       resource: {
@@ -55,6 +57,17 @@
       },
       isUri(object) {
        return object.type === 'uri'
+      },
+      getDataUri(triple) {
+        let uri = this.isSubject(triple.o) ? triple.s.value : triple.o.value
+        if (uri.indexOf('.gent/id/') !== -1) {
+          return uri.replace('.gent/id/', '.gent/data/')
+        }
+        return uri
+      },
+      getMarkdown(triple) {
+        let value = this.isSubject(triple.o) ? triple.s.value : triple.o.value
+        return markdown.parse(value);
       },
       getPredicate(key) {
         return this.resource[key][0].p.value
