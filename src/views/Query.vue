@@ -8,8 +8,8 @@
 
 <script>
 
-  import YASQE from 'yasgui-yasqe/dist/yasqe.bundled'
-  import YASR from 'yasgui-yasr/dist/yasr.bundled'
+  import YASQE from 'yasgui-yasqe/dist/yasqe.bundled.min'
+  import YASR from 'yasgui-yasr/dist/yasr.bundled.min'
 
   export default {
     name: 'home',
