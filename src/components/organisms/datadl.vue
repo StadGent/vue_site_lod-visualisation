@@ -60,10 +60,7 @@
       },
       getDataUri(triple) {
         let uri = this.isSubject(triple.o) ? triple.s.value : triple.o.value
-        if (uri.indexOf('.gent/id/') !== -1) {
-          return uri.replace('.gent/id/', '.gent/data/')
-        }
-        return uri
+        return uri.replace('.gent/id/', '.gent/data/')
       },
       getMarkdown(triple) {
         let value = this.isSubject(triple.o) ? triple.s.value : triple.o.value
