@@ -6,6 +6,14 @@
                 <span class="colon" aria-hidden="true"></span>
             </span>
             </h1>
+
+            <div class="box-top">
+                <div class="inner-box">
+                    <h2>Open data portaal</h2>
+                    <p>Bezoek <a href="https://data.stad.gent/data">https://data.stad.gent/data</a> voor een overzicht van alle beschikbare open data.</p>
+                </div>
+            </div>
+
             <h2 class="visually-hidden">Overview</h2>
             <ul class="grid-3">
                 <li class="teaser teaser-topic"
@@ -76,7 +84,7 @@
           await this.$store.dispatch('fetchDataSets')
         }
         catch (err) {
-          return this.$router.push({name: '404'})
+          return this.$router.replace({name: '404'})
         }
       }
     }

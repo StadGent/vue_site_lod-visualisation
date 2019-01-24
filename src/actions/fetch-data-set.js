@@ -25,7 +25,7 @@ export async function fetchDataSet ({commit}, id) {
 
   let response = await instance({
     method: 'post',
-    url: 'https://qa.stad.gent/sparql',
+    url: process.env.VUE_APP_SPARQL_ENDPOINT,
     data: formData,
   })
 

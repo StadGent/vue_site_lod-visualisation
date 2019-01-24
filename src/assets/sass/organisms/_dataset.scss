@@ -3,11 +3,25 @@ dl.dataset {
   dt .predicate {
     @include theme('color', 'color-tertiary--lighten-1', 'dataset-color');
 
+    font-size: .8em;
     font-weight: normal;
   }
 
   dd {
-    white-space: pre-wrap;
+
+    li>div>p:only-child {
+      margin: 0;
+    }
+
+    code {
+      @include theme('border-color', 'color-tertiary--lighten-3', 'dataset-color');
+
+      display: block;
+      margin: 1em 0;
+      padding-left: 1em;
+      font-size: .8em;
+      border-left: 1px solid;
+    }
 
     a.uri {
       display: inline-block;

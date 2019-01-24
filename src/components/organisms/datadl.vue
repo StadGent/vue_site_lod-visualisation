@@ -10,25 +10,27 @@
                 <ul v-if="resource[key].length > 1">
                     <li v-for="(triple, index) in resource[key]" :key="`${key}-${index}`">
                         <a class="uri" v-if="isUri(triple.o)"
-                           :href="isSubject(triple.o) ? triple.s.value : triple.o.value">
-                            {{isSubject(triple.o) ? triple.s.value : triple.o.value}}
+                           :href="getDataUri(triple)">
+                            {{getDataUri(triple)}}
                         </a>
-                        <span v-else>{{isSubject(triple.o) ? triple.s.value : triple.o.value}}</span>
+                        <div v-else v-html="getMarkdown(triple)"></div>
                     </li>
                 </ul>
-                <div v-else v-for="(triple, index) in resource[key]" :key="`${key}-${index}`">
-                    <a class="uri" v-if="isUri(triple.o)"
-                       :href="isSubject(triple.o) ? triple.s.value : triple.o.value">
-                        {{isSubject(triple.o) ? triple.s.value : triple.o.value}}
+                <template v-else v-for="(triple, index) in resource[key]">
+                    <a class="uri" v-if="isUri(triple.o)" :key="`${key}-${index}`"
+                       :href="getDataUri(triple)">
+                        {{getDataUri(triple)}}
                     </a>
-                    <span v-else>{{isSubject(triple.o) ? triple.s.value : triple.o.value}}</span>
-                </div>
+                    <div v-else v-html="getMarkdown(triple)" :key="`${key}-${index}`"></div>
+                </template>
             </dd>
         </template>
     </dl>
 </template>
 
 <script>
+  import * as markdown from 'markdown'
+
   export default {
     props: {
       resource: {
@@ -55,6 +57,14 @@
       },
       isUri(object) {
        return object.type === 'uri'
+      },
+      getDataUri(triple) {
+        let uri = this.isSubject(triple.o) ? triple.s.value : triple.o.value
+        return uri.replace('.gent/id/', '.gent/data/')
+      },
+      getMarkdown(triple) {
+        let value = this.isSubject(triple.o) ? triple.s.value : triple.o.value
+        return markdown.parse(value);
       },
       getPredicate(key) {
         return this.resource[key][0].p.value
