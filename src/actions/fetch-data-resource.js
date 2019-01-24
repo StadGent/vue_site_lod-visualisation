@@ -17,7 +17,7 @@ export async function fetchResource (id) {
     `
 
   let formData = new FormData()
-  formData.set('query', query)
+  formData.append('query', query)
 
   let response = await instance({
     method: 'post',

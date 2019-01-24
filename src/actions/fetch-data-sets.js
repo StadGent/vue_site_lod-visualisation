@@ -18,7 +18,7 @@ export async function fetchDataSets ({commit}) {
         ORDER BY ?title`
 
   let formData = new FormData()
-  formData.set('query', query)
+  formData.append('query', query)
 
   let response = await axios({
     method: 'post',

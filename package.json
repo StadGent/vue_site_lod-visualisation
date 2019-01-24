@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build:qa": "VUE_APP_SPARQL_ENDPOINT=https://qa.stad.gent/sparql vue-cli-service build",
+    "build:qa": "VUE_APP_DIST=qa vue-cli-service build",
     "build": "VUE_APP_SPARQL_ENDPOINT=https://stad.gent/sparql vue-cli-service build",
     "lint": "vue-cli-service lint",
     "postinstall": "./postinstall.sh"
@@ -23,6 +23,7 @@
     "@vue/cli-plugin-babel": "^3.1.1",
     "@vue/cli-plugin-eslint": "^3.1.1",
     "@vue/cli-service": "^3.1.1",
+    "@babel/plugin-transform-object-assign":  "^7.2.0",
     "babel-eslint": "^10.0.1",
     "breakpoint-sass": "^2.7.1",
     "eslint": "^5.8.0",
