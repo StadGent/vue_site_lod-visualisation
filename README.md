@@ -15,6 +15,11 @@ yarn run serve
 yarn run build
 ```
 
+### Compiles and minifies for qa
+```
+yarn run build:qa
+```
+
 ### Run your tests
 ```
 yarn run test
