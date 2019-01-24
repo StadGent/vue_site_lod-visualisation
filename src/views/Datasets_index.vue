@@ -7,10 +7,14 @@
             </span>
             </h1>
 
-            <div class="box-top">
+            <div class="cta-block box-left link" id="ODP_CTA">
                 <div class="inner-box">
-                    <h2>Open data portaal</h2>
-                    <p>Bezoek <a href="https://data.stad.gent/data">https://data.stad.gent/data</a> voor een overzicht van alle beschikbare open data.</p>
+                    <h2>Open Data Portaal</h2>
+                    <p>Ga naar het <a href="https://data.stad.gent/">Stad Gent Open Data Portaal</a> om deze datasets te
+                        filteren op o.a. trefwoord en categorie. U vindt op het Open Data Portaal een overzicht van alle
+                        open data die Stad Gent ter beschikking stelt, bijv. ook open data die in een csv- of kml-formaat
+                        gepubliceerd wordt.</p>
+                    <a href="https://data.stad.gent/" class="button button-primary">Open Data Portaal</a>
                 </div>
             </div>
 
@@ -38,6 +42,12 @@
         </section>
     </transition>
 </template>
+
+<style>
+    #ODP_CTA {
+        margin-bottom: 3rem;
+    }
+</style>
 
 <script>
   import { mapState } from 'vuex'

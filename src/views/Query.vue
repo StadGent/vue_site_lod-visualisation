@@ -8,18 +8,21 @@
 
 <script>
 
-  import YASQE from 'yasgui-yasqe/dist/yasqe.bundled.min'
-  import YASR from 'yasgui-yasr/dist/yasr.bundled.min'
-
   export default {
     name: 'home',
-    mounted () {
+    async mounted () {
+
+      const YASQE = await import(/* webpackChunkName: "YASQE" */ 'yasgui-yasqe/dist/yasqe.bundled.min').then(module => module.default)
+
       let yasqe = YASQE(document.querySelector('#yasqe'), {
         sparql: {
           showQueryButton: true,
           endpoint: process.env.VUE_APP_SPARQL_ENDPOINT
         }
       })
+
+      const YASR = await import(/* webpackChunkName: "YASR" */ 'yasgui-yasr/dist/yasr.bundled.min').then(module => module.default);
+
       let yasr = YASR(document.querySelector('#yasr'), {
         useGoogleCharts: false,
         getUsedPrefixes: yasqe.getPrefixesFromQuery,

@@ -27,7 +27,7 @@
     "breakpoint-sass": "^2.7.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
-    "gent_styleguide": "^3.0.0-alpha.10",
+    "gent_styleguide": "^3.0.0-alpha.12",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
     "susy": "^3.0.5",
