@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build:qa": "vue-cli-service build --mode qa",
-    "build": "vue-cli-service build",
+    "build:qa": "VUE_APP_SPARQL_ENDPOINT=https://qa.stad.gent/sparql vue-cli-service build",
+    "build": "VUE_APP_SPARQL_ENDPOINT=https://stad.gent/sparql vue-cli-service build",
     "lint": "vue-cli-service lint",
     "postinstall": "./postinstall.sh"
   },
