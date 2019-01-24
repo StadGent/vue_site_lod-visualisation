@@ -68,7 +68,7 @@ export default new Router({
     {
       path: '/query',
       name: 'query',
-      component: () => import(/* webpackChunkName: "datasets" */ './views/Query.vue'),
+      component: () => import(/* webpackChunkName: "query" */ './views/Query.vue'),
       meta: {
         menu: 'Query editor',
         title: 'Query',
