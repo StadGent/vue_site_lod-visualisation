@@ -11,7 +11,7 @@
                     <li v-for="(triple, index) in resource[key]" :key="`${key}-${index}`">
                         <a class="uri" v-if="isUri(triple.o)"
                            :href="getDataUri(triple)">
-                            {{getDataUri(triple)}}
+                            {{getUri(triple)}}
                         </a>
                         <div v-else v-html="getMarkdown(triple)"></div>
                     </li>
@@ -19,7 +19,7 @@
                 <template v-else v-for="(triple, index) in resource[key]">
                     <a class="uri" v-if="isUri(triple.o)" :key="`${key}-${index}`"
                        :href="getDataUri(triple)">
-                        {{getDataUri(triple)}}
+                        {{getUri(triple)}}
                     </a>
                     <div v-else v-html="getMarkdown(triple)" :key="`${key}-${index}`"></div>
                 </template>
@@ -58,9 +58,11 @@
       isUri(object) {
        return object.type === 'uri'
       },
+      getUri(triple) {
+        return this.isSubject(triple.o) ? triple.s.value : triple.o.value
+      },
       getDataUri(triple) {
-        let uri = this.isSubject(triple.o) ? triple.s.value : triple.o.value
-        return uri.replace('.gent/id/', '.gent/data/')
+        return this.getUri(triple).replace('.gent/id/', '.gent/data/')
       },
       getMarkdown(triple) {
         let value = this.isSubject(triple.o) ? triple.s.value : triple.o.value
