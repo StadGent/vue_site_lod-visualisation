@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import Menu from './assets/styleguide_override/menu.functions'
 
 Vue.config.productionTip = false
 
@@ -14,8 +13,6 @@ Vue.filter('truncate', (text, length, clamp) => {
 })
 
 require('@/assets/styleguide/js/base.js')
-
-Vue.prototype.$menu = Menu;
 
 router.beforeEach((to, from, next) => {
   let title

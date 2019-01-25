@@ -1,9 +1,14 @@
 'use strict'
 
-export default function Menu (elem) {
+/* menu.functions from gent_styleguide 3.0.0alpha12
+*  Modified only the exports method */
+
+module.exports = Menu
+
+function Menu (elem, options) {
   if (typeof gent_styleguide === 'undefined') {
-    // eslint-disable-next-line no-console
-    console.error('You need to include base.js.')
+    console.error('You need to include base.js.') // eslint-disable-line
+    // no-console
     return
   }
 
@@ -11,8 +16,8 @@ export default function Menu (elem) {
   const closebtn = elem.querySelector('.close')
   const drawer = elem.querySelector('.drawer')
   const overlay = elem.querySelector('.overlay')
-  // eslint-disable-next-line no-undef
-  const tabTrap = new gent_styleguide.TabTrap(drawer)
+
+  const tabTrap = new gent_styleguide.TabTrap(drawer) // eslint-disable-line no-undef
 
   /**
    * Closes the hamburger menu
@@ -33,6 +38,9 @@ export default function Menu (elem) {
       openbtn.focus()
       openbtn.setAttribute('aria-expanded', false)
     }
+
+    // eslint-disable-next-line no-undef
+    gent_styleguide.toggleScrollLockParent(true, drawer)
 
     // remove the menu from the tabindex
     setTimeout(function () {
@@ -67,6 +75,9 @@ export default function Menu (elem) {
 
     // handle keyboard input
     document.addEventListener('keydown', handleKeyboardInput)
+
+    // eslint-disable-next-line no-undef
+    gent_styleguide.toggleScrollLockParent(false, drawer)
   }
 
   /**
@@ -121,6 +132,6 @@ export default function Menu (elem) {
   overlay.addEventListener('click', close)
 
   return {
-    close, open
+    open, close
   }
 }

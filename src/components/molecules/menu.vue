@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import * as Menu from '../../assets/styleguide_override/menu.functions';
+
   export default {
     data () {
       return {
@@ -33,7 +35,7 @@
       }
     },
     mounted () {
-      this.menu = new this.$menu(this.$el)
+      this.menu = new Menu(this.$el)
     }
   }
 </script>

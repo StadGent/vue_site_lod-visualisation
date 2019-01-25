@@ -21,7 +21,7 @@ export default {
   components: { 'v-header': vHeader, 'v-footer': vFooter },
   computed: mapState([
     'a11yMessage'
-  ]),
+  ])
 }
 </script>
 
