@@ -13,7 +13,7 @@ export async function fetchResource (id) {
 
   const query =
     `
-    DESCRIBE <http://qa.stad.gent/id${id}> <https://qa.stad.gent/id${id}>
+    DESCRIBE <http://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}> <https://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}>
     `
 
   let formData = new FormData()

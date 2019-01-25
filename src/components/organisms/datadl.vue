@@ -53,7 +53,8 @@
         })
       },
       isSubject(object) {
-        return object.value === `https://qa.stad.gent/id${this.id}` || object.value === `http://qa.stad.gent/id${this.id}`
+        return object.value === `https://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${this.id}`
+          || object.value === `http://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${this.id}`
       },
       isUri(object) {
        return object.type === 'uri'
@@ -65,7 +66,7 @@
         return this.getUri(triple).replace('.gent/id/', '.gent/data/')
       },
       getMarkdown(triple) {
-        let value = this.isSubject(triple.o) ? triple.s.value : triple.o.value
+        let value = (this.isSubject(triple.o) ? triple.s.value : triple.o.value) + ''
         return markdown.parse(value);
       },
       getPredicate(key) {
