@@ -1,6 +1,9 @@
 <template>
-    <transition name="fade">
-        <section class="detail-layout" v-if="this.dataset">
+    <transition name="fade" mode="out-in">
+        <div :key="1" v-if="!loaded" class="loader">
+            <img src="@/assets/mob-loadingind.svg" alt="">
+        </div>
+        <section :key="2" class="detail-layout" v-else>
             <h1>{{title}}</h1>
             <datadl :resource="dataset" :id="id"></datadl>
         </section>
@@ -16,13 +19,6 @@
   export default {
     components: {datadl},
     mixins: [detailPageMixin],
-    data () {
-      return {
-        dataset: null,
-        title: null,
-        id: null
-      }
-    },
     watch: {
       '$route': 'fetchData'
     },
@@ -38,6 +34,7 @@
         this.id = this.dataset.id
         this.dataset = this.dataset.reduce(this.tripleReducer, {})
         this.setTitle()
+        this.loaded = true
       }
     }
   }

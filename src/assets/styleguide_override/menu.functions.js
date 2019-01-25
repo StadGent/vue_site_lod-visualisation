@@ -5,7 +5,7 @@
 
 module.exports = Menu
 
-function Menu (elem, options) {
+function Menu (elem) {
   if (typeof gent_styleguide === 'undefined') {
     console.error('You need to include base.js.') // eslint-disable-line
     // no-console

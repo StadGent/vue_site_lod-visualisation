@@ -2,7 +2,7 @@
   @include set-layout('width-10', 'offset-1');
 }
 
-#yasqe, #yasr {
+#yasgui {
   font-size: .6rem;
 
   @include desktop {
@@ -15,6 +15,10 @@
       content: none;
     }
   }
+}
+
+#yasqe {
+  margin-bottom: 2rem;
 }
 
 #yasr {

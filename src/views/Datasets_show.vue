@@ -1,9 +1,12 @@
 <template>
-    <transition name="fade">
-    <section class="detail-layout" v-if="dataset">
-        <h1>{{title}}</h1>
-        <datadl :resource="dataset" :id="id"></datadl>
-    </section>
+    <transition name="fade" mode="out-in">
+        <div :key="1" v-if="!loaded" class="loader">
+            <img src="@/assets/mob-loadingind.svg" alt="">
+        </div>
+        <section :key="2" class="detail-layout" v-else>
+            <h1>{{title}}</h1>
+            <datadl :resource="dataset" :id="id"></datadl>
+        </section>
     </transition>
 </template>
 
@@ -17,10 +20,7 @@
     mixins: [detailPageMixin],
     data () {
       return {
-        dataset: null,
-        crumbs: null,
-        title: null,
-        id: null
+        crumbs: null
       }
     },
     computed: mapState([
@@ -41,6 +41,7 @@
         this.dataset = this.dataset.reduce(this.tripleReducer, {})
         await this.setTitle()
         this.setCrumbs()
+        this.loaded = true;
       },
       setCrumbs() {
         this.crumbs = this.$route.meta.breadcrumb
