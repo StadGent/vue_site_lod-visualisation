@@ -132,6 +132,7 @@ $styleguide-dir: '../styleguide';
 @import "../styleguide/sass/61-layouts/general/sidebar-layout/_sidebar-layout.scss";
 // endinject
 
+@import "atoms/loader";
 @import "organisms/header";
 @import "organisms/dataset";
 @import "organisms/yasgui";

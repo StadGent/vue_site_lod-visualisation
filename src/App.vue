@@ -3,7 +3,9 @@
     <a href="#main" class="skiplink">Overslaan en naar de inhoud gaan</a>
     <v-header/>
     <main id="main" class="content-container">
-      <router-view/>
+      <transition name="fade" mode="out-in">
+        <router-view/>
+      </transition>
     </main>
     <v-footer/>
     <div role="status" aria-atomic="true" aria-live="polite" class="visually-hidden">{{ a11yMessage }}</div>

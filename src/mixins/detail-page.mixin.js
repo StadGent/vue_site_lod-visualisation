@@ -1,4 +1,12 @@
 export const detailPageMixin = {
+  data() {
+    return {
+      dataset: null,
+      title: null,
+      id: null,
+      loaded: false
+    }
+  },
   created() {
     this.fetchData()
   },
