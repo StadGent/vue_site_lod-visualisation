@@ -27,7 +27,7 @@
                         <div class="content__bottom">
                             <h3>{{ dataset.title.value }}</h3>
                             <p>{{ dataset.description.value | truncate }}</p>
-                            <router-link :to="{name: 'datasets_show', params: {id: dataset.btoa}}" class="read-more standalone-link">read more <span
+                            <router-link :to="{name: 'datasets_show', params: {id: dataset.btoa}}" class="read-more standalone-link">lees meer <span
                                     class="visually-hidden">{{ dataset.title.value }}</span></router-link>
                         </div>
                     </article>
