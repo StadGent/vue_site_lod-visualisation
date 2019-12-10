@@ -21,6 +21,7 @@
                        :href="getDataUri(triple)">
                         {{getUri(triple)}}
                     </a>
+                    <code v-else-if="isHTML(triple)" v-text="getValue(triple)"></code>
                     <div v-else v-html="getMarkdown(triple)" :key="`${key}-${index}`"></div>
                 </template>
             </dd>
@@ -59,8 +60,15 @@
       isUri(object) {
        return object.type === 'uri'
       },
+      isHTML (triple) {
+        let value = this.getValue(triple).trim()
+        return /^<.+>$/gms.test(value)
+      },
       getUri(triple) {
         return this.isSubject(triple.o) ? triple.s.value : triple.o.value
+      },
+      getValue(triple) {
+        return (this.isSubject(triple.o) ? triple.s.value : triple.o.value) + ''
       },
       getDataUri(triple) {
         return this.getUri(triple).replace('.gent/id/', '.gent/data/')
