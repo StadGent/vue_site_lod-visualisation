@@ -24,18 +24,8 @@ jobs:
       - name: install dependencies
         run: yarn install
 
-      - name: remove qa build
-        run: |
-          rm -rf qa
-          ls
-
       - name: build qa
         run: yarn run build:qa
-
-      - name: remove production build
-        run: |
-          rm -rf dist
-          ls
 
       - name: build production
         run: yarn run build
