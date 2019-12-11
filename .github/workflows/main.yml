@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - feature/actions
+    - master
+    - release/*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: npm install
+      run: npm install
+    - name: build qa
+      run: npm run build:qa
+    - name: build production
+      run: npm run build
+
