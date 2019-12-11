@@ -34,7 +34,7 @@ jobs:
         uses: EndBug/add-and-commit@v2.1.0
         with:
           message: "Autocommit builds"
-          path: "dist, qa"
+          path: "dist qa"
           force: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
