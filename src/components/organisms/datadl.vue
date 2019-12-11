@@ -21,7 +21,7 @@
                        :href="getDataUri(triple)">
                         {{getUri(triple)}}
                     </a>
-                    <code v-else-if="isHTML(triple)" v-text="getValue(triple)"></code>
+                    <code v-else-if="isHTML(triple)" v-text="getValue(triple)" :key="`${key}-${index}`"></code>
                     <div v-else v-html="getMarkdown(triple)" :key="`${key}-${index}`"></div>
                 </template>
             </dd>

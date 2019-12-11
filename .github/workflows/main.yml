@@ -24,12 +24,6 @@ jobs:
       - name: install dependencies
         run: yarn install
 
-      - name: Check assets
-        run: |
-          cd src
-          ls ./assets/styleguide/js
-          cd ../
-
       - name: build qa
         run: yarn run build:qa
 
