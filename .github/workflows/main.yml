@@ -27,23 +27,14 @@ jobs:
       - name: build qa
         run: yarn run build:qa
 
-      - name: Commit qa build
-        uses: EndBug/add-and-commit@v2.1.0
-        with:
-          message: "Build for qa"
-          path: qa
-          force: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: build production
         run: yarn run build
 
-      - name: Commit production build
+      - name: Autocommit builds
         uses: EndBug/add-and-commit@v2.1.0
         with:
-          message: "Build for production"
-          path: dist
+          message: "Autocommit builds"
+          path: "dist, qa"
           force: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
