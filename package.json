@@ -14,16 +14,17 @@
     "google": "^2.1.0",
     "markdown": "^0.5.0",
     "vue": "^2.5.17",
+    "vue-analytics": "^5.19.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "yasgui-yasqe": "^2.11.22",
     "yasgui-yasr": "^2.12.19"
   },
   "devDependencies": {
+    "@babel/plugin-transform-object-assign": "^7.2.0",
     "@vue/cli-plugin-babel": "^3.1.1",
     "@vue/cli-plugin-eslint": "^3.1.1",
     "@vue/cli-service": "^3.1.1",
-    "@babel/plugin-transform-object-assign":  "^7.2.0",
     "babel-eslint": "^10.0.1",
     "breakpoint-sass": "^2.7.1",
     "eslint": "^5.8.0",
