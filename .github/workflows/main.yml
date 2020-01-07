@@ -3,20 +3,37 @@ name: CI
 on:
   push:
     branches:
-    - feature/actions
-    - master
-    - release/*
+      - master
+      - release/*
 
 jobs:
   build:
-
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
-    - name: npm install
-      run: npm install
-    - name: build qa
-      run: npm run build:qa
-    - name: build production
-      run: npm run build
+      - name: Checkout repository
+        uses: actions/checkout@v1.0.0
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v1.2.0
+        with:
+          node-version: '10.x'
+
+      - name: install dependencies
+        run: yarn install
+
+      - name: build qa
+        run: yarn run build:qa
+
+      - name: build production
+        run: yarn run build
+
+      - name: Autocommit builds
+        uses: EndBug/add-and-commit@v2.1.0
+        with:
+          message: "Autocommit builds"
+          path: "dist qa"
+          force: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

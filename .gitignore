@@ -21,3 +21,7 @@ yarn-error.log*
 
 # ghent_styleguide
 src/assets/styleguide
+
+# builds
+/qa/
+/dist/
