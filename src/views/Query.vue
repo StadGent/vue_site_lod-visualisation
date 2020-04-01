@@ -2,8 +2,8 @@
     <section class="detail-layout">
         <h1>Query editor</h1>
         <transition name="fade" mode="out-in" v-on:enter="enter">
-            <div :key="1" v-if="!loaded" class="loader">
-                <img src="@/assets/mob-loadingind.svg" alt="">
+            <div :key="1" v-if="!loaded" class="spinner">
+                <div>&hellip;loading</div>
             </div>
             <div :key="2" id="yasgui" v-else>
                 <div id="yasqe"></div>
