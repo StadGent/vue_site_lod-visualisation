@@ -1,7 +1,7 @@
 <template>
     <transition name="fade" mode="out-in">
-        <div :key="1" v-if="!loaded" class="loader">
-            <img src="@/assets/mob-loadingind.svg" alt="">
+        <div :key="1" v-if="!loaded" class="spinner">
+            <div>&hellip;loading</div>
         </div>
         <section :key="2" class="detail-layout" v-else>
             <h1>{{title}}</h1>

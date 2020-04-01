@@ -21,8 +21,6 @@ Vue.filter('truncate', (text, length, clamp) => {
   return text.substring(0, length || 140) + (clamp || '...')
 })
 
-require('@/assets/styleguide/js/base.js')
-
 router.beforeEach((to, from, next) => {
   let title
   if (to.meta && to.meta.title) {

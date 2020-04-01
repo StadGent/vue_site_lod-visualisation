@@ -1,16 +1,14 @@
 <template>
-  <header class="header">
+  <header class="header header--menu">
     <div class="content-container">
       <logo/>
       <v-menu/>
     </div>
+    <div class="site-name">
+      {{ $store.state.projectName }}
+    </div>
     <breadcrumbs/>
     <hr>
-
-    <div class="subsite">
-      <span>{{ $store.state.projectName }}</span>
-    </div>
-
   </header>
 </template>
 
