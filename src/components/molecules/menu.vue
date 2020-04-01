@@ -5,8 +5,8 @@
             <li v-for="(route, index) in routes" :key="index">
                 <router-link :to="route"
                              active-class="active"
-                             :exact="route.path === '' || route.path === '/'"
-                             @click.native="menu.close()">{{ route.meta.menu }}
+                             :exact="route.path === '' || route.path === '/'">
+                    {{ route.meta.menu }}
                 </router-link>
             </li>
         </ul>
@@ -26,8 +26,9 @@
                             <li v-for="(route, index) in routes" :key="index">
                                 <router-link :to="route"
                                              active-class="active"
-                                             :exact="route.path === '' || route.path === '/'"
-                                             @click.native="menu.close()">{{ route.meta.menu }}
+                                             class="modal-close"
+                                             :exact="route.path === '' || route.path === '/'">
+                                    {{ route.meta.menu }}
                                 </router-link>
                             </li>
                         </ul>
@@ -54,7 +55,7 @@
       }
     },
     mounted () {
-      this.menu = new Modal(this.$refs.modal)
+      this.menu = new Modal(this.$refs.modal, {changeHash: false})
     }
   }
 </script>
