@@ -26,7 +26,11 @@ export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
     data: formData,
   })
 
-  const bindings = response.data.results.bindings
+  const bindings = response?.data?.results?.bindings
+
+  if (!bindings) {
+    return
+  }
 
   const nodes = [...state.nodes]
   if (!nodes.find((node) => node.id === id)) {

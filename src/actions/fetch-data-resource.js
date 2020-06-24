@@ -15,7 +15,7 @@ export async function fetchResource ({commit}, id) {
     data: formData,
   })
 
-  const bindings = response.data.results.bindings
+  const bindings = response?.data?.results?.bindings
 
   if (!bindings) {
     throw new Error('404')

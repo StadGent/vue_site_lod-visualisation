@@ -15,5 +15,11 @@ export async function fetchDataSet ({commit}, id) {
     data: formData,
   })
 
-  await commit('SET_DATASET', {id: `${atob(id)}`, bindings: response.data.results.bindings})
+  const bindings = response?.data?.results?.bindings
+
+  if (!bindings) {
+    throw new Error('404')
+  }
+
+  await commit('SET_DATASET', {id: `${atob(id)}`, bindings})
 }
