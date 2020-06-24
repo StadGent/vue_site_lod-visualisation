@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <section class="overview-layout" v-if="datasets.length">
+        <section class="overview-layout">
             <h1 class="overview-title">
             <span class="overview-title-colon">LOD datasets
                 <span class="colon" aria-hidden="true"></span>

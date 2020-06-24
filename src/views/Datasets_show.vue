@@ -6,6 +6,7 @@
         <section :key="2" class="detail-layout" v-else>
             <h1>{{title}}</h1>
             <datadl :resource="dataset" :id="id"></datadl>
+            <graph/>
         </section>
     </transition>
 </template>
@@ -24,24 +25,22 @@
       }
     },
     computed: mapState([
-      'datasets',
-      'details'
+      'last'
     ]),
     methods: {
       async fetchData () {
 
         try {
           await this.$store.dispatch('fetchDataSet', this.$route.params.id)
+          this.dataset = this.last.bindings.reduce(this.tripleReducer, {})
+          this.id = this.last.id
+          await this.setTitle()
+          this.setCrumbs()
+          this.loaded = true;
         } catch (err) {
           return this.$router.replace({name: '404'})
         }
-
-        this.dataset = this.details[this.$route.params.id]
-        this.id = this.dataset.id
-        this.dataset = this.dataset.reduce(this.tripleReducer, {})
-        await this.setTitle()
-        this.setCrumbs()
-        this.loaded = true;
+        await this.$store.dispatch('fetchRelatedSubjects', {id: this.id, dataset: this.dataset})
       },
       setCrumbs() {
         this.crumbs = this.$route.meta.breadcrumb

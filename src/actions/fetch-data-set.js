@@ -1,11 +1,6 @@
 import axios from 'axios'
 
-export async function fetchDataSet ({commit}, id) {
-
-  // only fetch dataset once
-  if (this.state.details[id]) {
-    return
-  }
+export async function fetchDataSet ({commit, getters}, id) {
 
   const instance = axios.create({
     transformRequest: [
@@ -29,7 +24,5 @@ export async function fetchDataSet ({commit}, id) {
     data: formData,
   })
 
-  response = response.data.results.bindings
-  response.id = id
-  commit('SET_DATASET', response)
+  await commit('SET_DATASET', {id: `${atob(id)}`, bindings: response.data.results.bindings})
 }

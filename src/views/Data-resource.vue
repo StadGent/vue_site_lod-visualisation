@@ -6,15 +6,16 @@
         <section :key="2" class="detail-layout" v-else>
             <h1>{{title}}</h1>
             <datadl :resource="dataset" :id="id"></datadl>
+            <graph/>
         </section>
     </transition>
 </template>
 
 <script>
 
-  import { fetchResource } from '../actions/fetch-data-resource'
   import datadl from '../components/organisms/datadl'
   import { detailPageMixin } from '../mixins/detail-page.mixin'
+  import { mapGetters, mapState } from 'vuex'
 
   export default {
     components: {datadl},
@@ -22,19 +23,27 @@
     watch: {
       '$route': 'fetchData'
     },
+    computed: {
+      ...mapState([
+        'last'
+      ]),
+      ...mapGetters([
+        'lastId'
+      ])
+    },
     methods: {
       async fetchData () {
         try {
-          this.dataset = await fetchResource(this.$route.path)
+          await this.$store.dispatch('fetchResource', this.$route.path)
+          this.dataset = this.last.bindings.reduce(this.tripleReducer, {})
+          this.id = this.last.id
+          await this.setTitle()
+          this.loaded = true
         }
         catch (err) {
           return this.$router.replace({name: '404'})
         }
-
-        this.id = this.dataset.id
-        this.dataset = this.dataset.reduce(this.tripleReducer, {})
-        this.setTitle()
-        this.loaded = true
+        await this.$store.dispatch('fetchRelatedSubjects', {id: this.id, dataset: this.dataset})
       }
     }
   }

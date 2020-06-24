@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function fetchResource (id) {
+export async function fetchResource ({commit, getters}, id) {
 
   const instance = axios.create({
     transformRequest: [
@@ -15,7 +15,6 @@ export async function fetchResource (id) {
     `
     DESCRIBE <http://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}> <https://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}>
     `
-
   let formData = new FormData()
   formData.append('query', query)
 
@@ -25,12 +24,11 @@ export async function fetchResource (id) {
     data: formData,
   })
 
-  response = response.data.results.bindings
-  response.id = id
+  const bindings = response.data.results.bindings
 
-  if (!response.length) {
+  if (!bindings) {
     throw new Error('404')
   }
 
-  return response
+  await commit('SET_DATASET', {id: `https://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}`, bindings})
 }
