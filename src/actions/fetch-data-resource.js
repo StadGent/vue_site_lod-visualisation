@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function fetchResource ({commit, getters}, id) {
+export async function fetchResource ({commit}, id) {
 
   const instance = axios.create({
     transformRequest: [

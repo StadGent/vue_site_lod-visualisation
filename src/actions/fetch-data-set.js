@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function fetchDataSet ({commit, getters}, id) {
+export async function fetchDataSet ({commit}, id) {
 
   const instance = axios.create({
     transformRequest: [
