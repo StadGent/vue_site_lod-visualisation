@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist'
 import { fetchDataSets } from './actions/fetch-data-sets'
 import { fetchDataSet } from './actions/fetch-data-set'
 import { fetchResource } from './actions/fetch-data-resource'
@@ -7,7 +8,13 @@ import { fetchRelatedSubjects } from './actions/fetch-related-subjects'
 
 Vue.use(Vuex)
 
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+  reducer: ({visited, nodes, edges}) => ({visited, nodes, edges})
+})
+
 export default new Vuex.Store({
+  plugins: [vuexLocal.plugin],
   state: {
     projectName: 'Linked Open Data',
     datasets: [],
