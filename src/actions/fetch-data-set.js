@@ -1,15 +1,6 @@
-import axios from 'axios'
+import { instance } from '../helpers/dataset.helpers'
 
 export async function fetchDataSet ({commit}, id) {
-
-  const instance = axios.create({
-    transformRequest: [
-      (data, headers) => {
-        headers.common.Accept = 'application/sparql-results+json'
-        return data
-      },
-    ]
-  })
 
   const query =
     `

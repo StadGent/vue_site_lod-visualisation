@@ -1,16 +1,6 @@
-import axios from 'axios'
-import { getTitle } from '../helpers/dataset.helpers'
+import { getLabel, getTitle, instance } from '../helpers/dataset.helpers'
 
 export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
-
-  const instance = axios.create({
-    transformRequest: [
-      (data, headers) => {
-        headers.common.Accept = 'application/sparql-results+json'
-        return data
-      },
-    ]
-  })
 
   const query =
     `
@@ -30,17 +20,13 @@ export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
   let formData = new FormData()
   formData.append('query', query)
 
-  let response = await instance({
+  const response = await instance({
     method: 'post',
     url: process.env.VUE_APP_SPARQL_ENDPOINT,
     data: formData,
   })
 
   const bindings = response.data.results.bindings
-
-  function getLabel (value) {
-    return value.substr((value.lastIndexOf('#') > -1 ? value.lastIndexOf('#') : value.lastIndexOf('/')) + 1)
-  }
 
   const nodes = [...state.nodes]
   if (!nodes.find((node) => node.id === id)) {

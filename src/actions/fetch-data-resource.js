@@ -1,15 +1,6 @@
-import axios from 'axios'
+import { instance } from '../helpers/dataset.helpers'
 
 export async function fetchResource ({commit}, id) {
-
-  const instance = axios.create({
-    transformRequest: [
-      (data, headers) => {
-        headers.common.Accept = 'application/sparql-results+json'
-        return data
-      },
-    ]
-  })
 
   const query =
     `
@@ -18,7 +9,7 @@ export async function fetchResource ({commit}, id) {
   let formData = new FormData()
   formData.append('query', query)
 
-  let response = await instance({
+  const response = await instance({
     method: 'post',
     url: process.env.VUE_APP_SPARQL_ENDPOINT,
     data: formData,
