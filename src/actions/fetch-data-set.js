@@ -1,6 +1,13 @@
 import { instance } from '../helpers/dataset.helpers'
 
-export async function fetchDataSet ({commit}, id) {
+export async function fetchDataSet ({commit, getters}, id) {
+
+  /**
+   * Return in case of page refresh.
+   */
+  if (getters.lastId === atob(id)) {
+    return
+  }
 
   const query =
     `

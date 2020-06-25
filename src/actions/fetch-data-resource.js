@@ -1,6 +1,13 @@
 import { instance } from '../helpers/dataset.helpers'
 
-export async function fetchResource ({commit}, id) {
+export async function fetchResource ({commit, getters}, id) {
+
+  /**
+   * Return in case of page refresh.
+   */
+  if (getters.lastId === `https://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}`) {
+    return
+  }
 
   const query =
     `

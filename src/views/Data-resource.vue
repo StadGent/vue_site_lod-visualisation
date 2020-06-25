@@ -15,20 +15,14 @@
 
   import datadl from '../components/organisms/datadl'
   import { detailPageMixin } from '../mixins/detail-page.mixin'
-  import { mapGetters, mapState } from 'vuex'
+  import { mapGetters } from 'vuex'
 
   export default {
     components: {datadl},
     mixins: [detailPageMixin],
-    watch: {
-      '$route': 'fetchData'
-    },
     computed: {
-      ...mapState([
-        'last'
-      ]),
       ...mapGetters([
-        'lastId'
+        'last'
       ])
     },
     methods: {
@@ -49,5 +43,3 @@
   }
 </script>
 
-<style>
-</style>

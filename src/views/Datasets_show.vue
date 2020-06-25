@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapGetters } from 'vuex'
   import datadl from '../components/organisms/datadl'
   import { detailPageMixin } from '../mixins/detail-page.mixin'
 
@@ -24,12 +24,11 @@
         crumbs: null
       }
     },
-    computed: mapState([
-      'last'
-    ]),
+    computed: {
+      ...mapGetters(['last']),
+    },
     methods: {
       async fetchData () {
-
         try {
           await this.$store.dispatch('fetchDataSet', this.$route.params.id)
           this.dataset = this.last.bindings.reduce(this.tripleReducer, {})
@@ -54,6 +53,3 @@
     }
   }
 </script>
-
-<style>
-</style>
