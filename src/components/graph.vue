@@ -10,12 +10,12 @@
                     :disabled="disablePrevious">
                 Vorige
             </button>
-            <button class="button button-secondary button-small"
+            <button class="button button-secondary button-small push-right"
                     @click="selectNext"
                     :disabled="disableNext">
                 Volgende
             </button>
-            <button class="button button-secondary button-small right"
+            <button class="button button-secondary button-small"
                     @click="clearNodes"
                     :disabled="disableDelete">
                 Wis alle nodes
@@ -126,7 +126,7 @@
         padding-top: 1rem;
     }
 
-    .right {
-        margin-left: auto;
+    .push-right {
+        margin-right: auto;
     }
 </style>
