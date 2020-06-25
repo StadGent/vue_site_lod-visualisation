@@ -1,17 +1,6 @@
 <template>
     <article class="detail-layout">
         <h1>We kunnen de pagina die je zoekt niet vinden</h1>
-        <div class="help-block">
-            <h2>Hoe kunnen we u verder helpen?</h2>
-            <div class="help-block-section">
-                <h3>1. Verder navigeren vanaf hier?</h3>
-                <p class="">Dat kan op verschillende manieren:</p>
-                <ul class="icon-list">
-                    <li><i class="icon-home" aria-hidden="true"/><span>Terugkeren naar de <router-link :to="'/'" >homepage</router-link></span></li>
-                    <li><i class="icon-fancyback" aria-hidden="true"/><span>De terugknop van uw browser gebruiken</span></li>
-                </ul>
-            </div>
-        </div>
         <div class="404-poetry">
             <h2>Speurtocht</h2>
             <p>we kamden de stad uit,<br >

@@ -1,36 +1,32 @@
-import axios from 'axios'
+import { instance } from '../helpers/dataset.helpers'
 
-export async function fetchResource (id) {
+export async function fetchResource ({commit, getters}, id) {
 
-  const instance = axios.create({
-    transformRequest: [
-      (data, headers) => {
-        headers.common.Accept = 'application/sparql-results+json'
-        return data
-      },
-    ]
-  })
+  /**
+   * Return in case of page refresh.
+   */
+  if (getters.lastId === `https://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}`) {
+    return
+  }
 
   const query =
     `
     DESCRIBE <http://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}> <https://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}>
     `
-
   let formData = new FormData()
   formData.append('query', query)
 
-  let response = await instance({
+  const response = await instance({
     method: 'post',
     url: process.env.VUE_APP_SPARQL_ENDPOINT,
     data: formData,
   })
 
-  response = response.data.results.bindings
-  response.id = id
+  const bindings = response?.data?.results?.bindings
 
-  if (!response.length) {
+  if (!bindings) {
     throw new Error('404')
   }
 
-  return response
+  await commit('SET_DATASET', {id: `https://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${id}`, bindings})
 }

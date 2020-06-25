@@ -1,0 +1,28 @@
+.detail-layout .highlight--inverted {
+  > .highlight__inner {
+    @include theme('border-color', 'color-primary--lighten-4', 'contact-details-border-color');
+    border-width: 2px 0;
+    border-style: solid;
+    padding: 0;
+
+    [class*="cs--"] & {
+      background-color: transparent;
+    }
+
+    &::before {
+      @include spot-image('loupe', 7rem);
+      box-shadow: none;
+    }
+
+    .vis-network {
+      margin: 0;
+    }
+  }
+
+  .accolade {
+    &::before,
+    &::after {
+      @include theme('background', 'color-secondary', 'contact-details-inverted-background-color');
+    }
+  }
+}

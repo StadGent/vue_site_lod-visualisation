@@ -1,32 +1,63 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist'
 import { fetchDataSets } from './actions/fetch-data-sets'
 import { fetchDataSet } from './actions/fetch-data-set'
+import { fetchResource } from './actions/fetch-data-resource'
+import { fetchRelatedSubjects } from './actions/fetch-related-subjects'
 
 Vue.use(Vuex)
 
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+  reducer: ({visited, nodes, edges}) => ({visited, nodes, edges})
+})
+
 export default new Vuex.Store({
+  plugins: [vuexLocal.plugin],
   state: {
     projectName: 'Linked Open Data',
     datasets: [],
-    details: {},
+    visited: [],
+    nodes: [],
+    edges: [],
     a11yMessage: null
+  },
+  getters: {
+    ids: state => state.visited.map(v => v.id),
+    last: state => state.visited[state.visited.length - 1],
+    lastId: (state, getters) => getters.last?.id,
+    getSetById: state => id => state.visited.find(v => v.id === id),
+    getSetByIndex: state => index => state.visited[index]
   },
   mutations: {
     SET_DATASETS (state, data) {
       state.datasets = data
     },
     SET_DATASET (state, data) {
-      state.details[data.id] = data
+      state.visited.push(data)
     },
     SET_A11YMESSAGE (state, data) {
       state.a11yMessage = data
-    }
+    },
+    SET_NODES (state, data) {
+      state.nodes = data
+    },
+    SET_EDGES (state, data) {
+      state.edges = data
+    },
+    CLEAR_GRAPH (state) {
+      state.nodes = []
+      state.edges = []
+      state.visited = []
+    },
   },
   actions: {
     fetchDataSets,
     fetchDataSet,
-    setA11yMessage({commit}, message) {
+    fetchResource,
+    fetchRelatedSubjects,
+    setA11yMessage ({commit}, message) {
       commit('SET_A11YMESSAGE', message)
     }
   }

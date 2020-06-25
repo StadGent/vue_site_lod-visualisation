@@ -1,20 +1,13 @@
-import axios from 'axios'
+import { instance } from '../helpers/dataset.helpers'
 
-export async function fetchDataSet ({commit}, id) {
+export async function fetchDataSet ({commit, getters}, id) {
 
-  // only fetch dataset once
-  if (this.state.details[id]) {
+  /**
+   * Return in case of page refresh.
+   */
+  if (getters.lastId === atob(id)) {
     return
   }
-
-  const instance = axios.create({
-    transformRequest: [
-      (data, headers) => {
-        headers.common.Accept = 'application/sparql-results+json'
-        return data
-      },
-    ]
-  })
 
   const query =
     `
@@ -29,7 +22,11 @@ export async function fetchDataSet ({commit}, id) {
     data: formData,
   })
 
-  response = response.data.results.bindings
-  response.id = id
-  commit('SET_DATASET', response)
+  const bindings = response?.data?.results?.bindings
+
+  if (!bindings) {
+    throw new Error('404')
+  }
+
+  await commit('SET_DATASET', {id: `${atob(id)}`, bindings})
 }

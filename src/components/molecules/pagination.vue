@@ -6,7 +6,7 @@
         <router-link :to="{path: `${this.$route.path}#main`, query: Object.assign({}, $route.query,{page: +active-1})}"
                    class="previous"
                    @click.native="blur">
-          vorige
+          Vorige
           <span class="visually-hidden">pagina</span>
         </router-link>
       </li>
@@ -59,7 +59,7 @@
         <router-link :to="{path: `${this.$route.path}#main`, query: Object.assign({}, $route.query, {page: +active+1})}"
                    class="next"
                    @click.native="blur">
-          volgende
+          Volgende
           <span class="visually-hidden">pagina</span>
         </router-link>
       </li>

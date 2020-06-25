@@ -1,5 +1,8 @@
+import { getTitle } from '../helpers/dataset.helpers'
+import graph from '../components/graph'
+
 export const detailPageMixin = {
-  data() {
+  data () {
     return {
       dataset: null,
       title: null,
@@ -7,7 +10,8 @@ export const detailPageMixin = {
       loaded: false
     }
   },
-  created() {
+  components: {graph},
+  created () {
     this.fetchData()
   },
   watch: {
@@ -15,19 +19,13 @@ export const detailPageMixin = {
   },
   methods: {
     getTitle () {
-      const predicates = ['prefLabel', 'label', 'title', 'name', 'firstName']
-      for (let i = 0; i < predicates.length; i++) {
-        if (this.dataset[predicates[i]]) {
-          return this.dataset[predicates[i]][0].o.value;
-        }
-      }
-      return 'detail view'
+      return getTitle(this.dataset)
     },
     async setTitle () {
       this.title = await this.getTitle()
       document.title = `${this.title} | LOD`
     },
-    tripleReducer(acc, triple) {
+    tripleReducer (acc, triple) {
       const p = triple.p.value
       let lastIndex = p.lastIndexOf('#') > -1 ? p.lastIndexOf('#') : p.lastIndexOf('/')
       let shortName = p.substr(lastIndex + 1)
