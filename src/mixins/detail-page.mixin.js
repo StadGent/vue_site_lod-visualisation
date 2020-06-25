@@ -1,5 +1,5 @@
 import { getTitle } from '../helpers/dataset.helpers'
-import graph from '../components/graph'
+import graph from '../components/molecules/graph'
 
 export const detailPageMixin = {
   data () {

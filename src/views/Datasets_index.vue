@@ -12,14 +12,15 @@
                     <h2>Open Data Portaal</h2>
                     <p>Ga naar het <a href="https://data.stad.gent/">Stad Gent Open Data Portaal</a> om deze datasets te
                         filteren op o.a. trefwoord en categorie. U vindt op het Open Data Portaal een overzicht van alle
-                        open data die Stad Gent ter beschikking stelt, bijv. ook open data die in een csv- of kml-formaat
+                        open data die Stad Gent ter beschikking stelt, bijv. ook open data die in een csv- of
+                        kml-formaat
                         gepubliceerd wordt.</p>
                     <div class="links">
                         <a href="https://data.stad.gent/" class="button button-primary">Open Data Portaal</a>
                     </div>
                 </div>
             </div>
-
+            <search class="mb-40" v-model="searchValue"/>
             <h2 class="visually-hidden">Overview</h2>
             <ul class="grid-3">
                 <li class="teaser teaser-topic"
@@ -29,7 +30,8 @@
                         <div class="content__bottom">
                             <h3>{{ dataset.title.value }}</h3>
                             <p>{{ dataset.description.value | truncate }}</p>
-                            <router-link :to="{name: 'datasets_show', params: {id: dataset.btoa}}" class="read-more standalone-link">Lees meer <span
+                            <router-link :to="{name: 'datasets_show', params: {id: dataset.btoa}}"
+                                         class="read-more standalone-link">Lees meer <span
                                     class="visually-hidden">{{ dataset.title.value }}</span></router-link>
                         </div>
                     </article>
@@ -54,26 +56,34 @@
 <script>
   import { mapState } from 'vuex'
   import pagination from '../components/molecules/pagination'
+  import search from '../components/molecules/search'
 
   export default {
-    components: {pagination},
-    data() {
+    components: {search, pagination},
+    data () {
       return {
-        itemsPerPage: 12
+        itemsPerPage: 12,
+        searchValue: ''
       }
     },
     computed: {
       ...mapState([
-                 'datasets'
-               ]),
-      totalPages() {
-        return Math.ceil(this.datasets.length / this.itemsPerPage)
+        'datasets'
+      ]),
+      searchValueArray () {
+        return this.searchValue.split(' ')
       },
-      paginatedItems() {
+      filteredSets () {
+        return this.datasets.filter(({title, description}) => this.checkValues(this.searchValueArray, title.value + ' ' + description.value))
+      },
+      totalPages () {
+        return Math.ceil(this.filteredSets.length / this.itemsPerPage)
+      },
+      paginatedItems () {
         const index = this.currentPage * this.itemsPerPage - this.itemsPerPage
-        return this.datasets.slice(index, index + this.itemsPerPage)
+        return this.filteredSets.slice(index, index + this.itemsPerPage)
       },
-      currentPage() {
+      currentPage () {
         const queryPage = this.$route.query.page || 1
         if (queryPage <= 0 || isNaN(queryPage)) {
           return 1
@@ -98,6 +108,15 @@
         catch (err) {
           return this.$router.replace({name: '404'})
         }
+      },
+      checkValues (needles, stack) {
+        stack = stack.toUpperCase()
+        for (let i = needles.length; i--;) {
+          if (stack.indexOf(needles[i].toUpperCase()) === -1) {
+            return false
+          }
+        }
+        return true
       }
     }
   }
