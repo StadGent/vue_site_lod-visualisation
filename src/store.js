@@ -35,7 +35,6 @@ export default new Vuex.Store({
       state.datasets = data
     },
     SET_DATASET (state, data) {
-      console.debug('pushing')
       state.visited.push(data)
     },
     SET_A11YMESSAGE (state, data) {
