@@ -2,17 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import VueAnalytics from 'vue-analytics'
+import VueGtag from 'vue-gtag'
 
 Vue.config.productionTip = false
 
 /**
  * Google analytics
  */
-Vue.use(VueAnalytics, {
-  id: 'UA-791237-65',
-  router
-})
+Vue.use(VueGtag, {config: {id: 'UA-791237-65'}}, router)
 
 Vue.filter('truncate', (text, length, clamp) => {
   if (!text) {
