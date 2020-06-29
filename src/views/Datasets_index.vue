@@ -2,19 +2,15 @@
     <transition name="fade">
         <section class="overview-layout">
             <h1 class="overview-title">
-            <span class="overview-title-colon">LOD datasets
-                <span class="colon" aria-hidden="true"></span>
-            </span>
+                <span class="overview-title-colon">LOD datasets<span class="colon" aria-hidden="true"></span></span>
             </h1>
 
             <div class="cta-block highlight highlight--left link" id="ODP_CTA">
                 <div class="highlight__inner">
                     <h2>Open Data Portaal</h2>
-                    <p>Ga naar het <a href="https://data.stad.gent/">Stad Gent Open Data Portaal</a> om deze datasets te
-                        filteren op o.a. trefwoord en categorie. U vindt op het Open Data Portaal een overzicht van alle
+                    <p>Ga naar het <a href="https://data.stad.gent/">Stad Gent Open Data Portaal</a> voor een overzicht van alle
                         open data die Stad Gent ter beschikking stelt, bijv. ook open data die in een csv- of
-                        kml-formaat
-                        gepubliceerd wordt.</p>
+                        kml-formaat gepubliceerd wordt.</p>
                     <div class="links">
                         <a href="https://data.stad.gent/" class="button button-primary">Open Data Portaal</a>
                     </div>
