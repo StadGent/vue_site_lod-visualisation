@@ -35,7 +35,11 @@
       return {
         pos: null,
         options: {
+          interaction: {
+            hover: true
+          },
           edges: {
+            chosen: false,
             font: {
               strokeWidth: 5
             }
