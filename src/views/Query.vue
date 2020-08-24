@@ -46,6 +46,7 @@
         })
 
         yasqe.options.sparql.callbacks.complete = yasr.setResponse
+        yasqe.query();
       }
     }
   }
@@ -58,4 +59,11 @@
     ** import not possible due to relative modules not found.
     ** @import "~yasgui-yasr/dist/yasr.min.css";
     */
+
+    /*
+    ** Deep selector for child components.
+    */
+    >>> .yasr a:hover, .yasr a:focus {
+      text-decoration: none;
+    }
 </style>
