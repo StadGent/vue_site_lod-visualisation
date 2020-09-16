@@ -71,6 +71,9 @@
         return (this.isSubject(triple.o) ? triple.s.value : triple.o.value) + ''
       },
       getDataUri(triple) {
+        if (process.env.NODE_ENV === 'development') {
+          return this.getUri(triple).replace(/http.?:\/\/stad.gent\/(id|data)\//, 'http://localhost:8080/');
+        }
         return this.getUri(triple).replace('.gent/id/', '.gent/data/')
       },
       getMarkdown(triple) {

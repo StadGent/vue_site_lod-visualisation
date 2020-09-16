@@ -32,31 +32,35 @@ export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
     return
   }
 
+  id = id.replace(/http.?:\/\//, '')
+
   const nodes = [...state.nodes]
   if (!nodes.find((node) => node.id === id)) {
     nodes.push({
-      id: id,
+      id: id.replace(/http.?:\/\//, ''),
       label: getTitle(dataset)
     })
   }
   bindings.forEach(({naar}) => {
-    if (nodes.find((node) => node.id === naar.value)) {
+    const nodeId = naar.value.replace(/http.?:\/\//, '')
+    if (nodes.find((node) => node.id === nodeId)) {
       return
     }
     nodes.push({
-      id: naar.value,
+      id: nodeId,
       label: getLabel(naar.value)
     })
   })
 
   const edges = [...state.edges]
   bindings.forEach(({naar, pijl, pijlAndereRichting}) => {
-    if (edges.find(({from, to}) => from === id && to === naar.value)) {
+    const nodeId = naar.value.replace(/http.?:\/\//, '')
+    if (edges.find(({from, to}) => from === id && to === nodeId)) {
       return
     }
     edges.push({
       from: id,
-      to: naar.value,
+      to: nodeId,
       label: getLabel(pijl ? pijl.value : pijlAndereRichting.value),
       arrows: pijl && pijl.value ? 'to' : 'from'
     })
