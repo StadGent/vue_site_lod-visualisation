@@ -97,25 +97,29 @@
         if (!nodes.length) {
           return
         }
-        window.location.href = nodes[0].replace('.gent/id/', '.gent/data/')
+        if (process.env.NODE_ENV === 'development') {
+          window.location.href = 'http://' + nodes[0].replace(/stad.gent\/(id|data)\//, 'localhost:8080/')
+        } else {
+          window.location.href = 'https://' + nodes[0].replace('.gent/id/', '.gent/data/')
+        }
       },
       clearNodes () {
         this.CLEAR_GRAPH()
         this.pos = 0
       },
       selectCurrent: function () {
-        this.$refs.network.selectNodes([this.lastId])
+        this.$refs.network.selectNodes([this.lastId.replace(/http.?:\/\//, '')])
       },
       selectPrevious () {
         let previous = this.getSetByIndex(--this.pos)?.id
         if (previous) {
-          this.$refs.network.selectNodes([previous])
+          this.$refs.network.selectNodes([previous.replace(/http.?:\/\//, '')])
         }
       },
       selectNext () {
         let next = this.getSetByIndex(++this.pos)?.id
         if (next) {
-          this.$refs.network.selectNodes([next])
+          this.$refs.network.selectNodes([next.replace(/http.?:\/\//, '')])
         }
       }
     },
