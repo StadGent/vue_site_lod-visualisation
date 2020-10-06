@@ -19,11 +19,11 @@
             <search class="mb-40" v-model="searchValue"/>
             <h2 class="visually-hidden">Overview</h2>
             <ul class="grid-3">
-                <li class="teaser teaser-topic"
+                <li class="teaser teaser--underlined"
                     v-for="(dataset, index) in paginatedItems"
                     :key="`dataset-${index}`">
                     <article class="teaser-content">
-                        <div class="content__bottom">
+                        <div class="content__second">
                             <h3>{{ dataset.title.value }}</h3>
                             <p>{{ dataset.description.value | truncate }}</p>
                             <router-link :to="{name: 'datasets_show', params: {id: dataset.btoa}}"

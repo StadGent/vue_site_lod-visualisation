@@ -5,12 +5,10 @@
             <div class="content-container">
                 <h2 id="system-breadcrumb" class="visually-hidden">Breadcrumb</h2>
                 <ol class="breadcrumb no-style">
-                    <transition-group name="fade" mode="out-in">
-                        <li v-for="(crumb, index) in crumbs" :key="'crumb-' + index">
-                            <router-link v-if="crumb.link" :to="{ name: crumb.link }">{{ crumb.name }}</router-link>
-                            <span v-else>{{ crumb.name }}</span>
-                        </li>
-                    </transition-group>
+                    <li v-for="(crumb, index) in crumbs" :key="'crumb-' + index">
+                        <router-link v-if="crumb.link" :to="{ name: crumb.link }">{{ crumb.name }}</router-link>
+                        <span v-else>{{ crumb.name }}</span>
+                    </li>
                 </ol>
             </div>
         </nav>
