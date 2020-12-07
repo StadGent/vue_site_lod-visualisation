@@ -4380,10 +4380,10 @@ gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
 
-gent_styleguide@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/gent_styleguide/-/gent_styleguide-4.0.0.tgz#c209b0465612c8ea1e518c9ff77d2ae5bace78bb"
-  integrity sha512-fyHrqRmEnAvjJNfIXIq7HN9/ag/ucEQ3EWSdYh435yVdTAASTnZPuYV/fucZqOiJGgLaPZy4AVVseKiCh1hDcA==
+gent_styleguide@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.npmjs.org/gent_styleguide/-/gent_styleguide-4.1.0.tgz#11cb73f5ac18c70d00ed6323cac1471ce6a2c629"
+  integrity sha512-ZqdqbCFEiDTg4F4HPYmTeW4krNq/qJ04VXhQbBNiEdRvjqQvZE0T9hHgyR+BZyL/F+pxZAlRId7jJmZ24tmOPA==
   dependencies:
     "@digipolis-gent/modal" "^1.0.2"
     allietabs "^1.2.2"
