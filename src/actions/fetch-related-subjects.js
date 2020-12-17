@@ -34,38 +34,56 @@ export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
 
   id = id.replace(/http.?:\/\//, '')
 
-  const nodes = [...state.nodes]
-  if (!nodes.find((node) => node.id === id)) {
-    nodes.push({
-      id: id.replace(/http.?:\/\//, ''),
-      label: getTitle(dataset)
+  function nodes () {
+    const nodes = [...state.nodes]
+    if (!nodes.find((node) => node.id === id)) {
+      nodes.push({
+        id: id.replace(/http.?:\/\//, ''),
+        label: getTitle(dataset)
+      })
+    }
+    bindings.forEach(({naar}) => {
+      const nodeId = naar.value.replace(/http.?:\/\//, '')
+      if (nodes.find((node) => node.id === nodeId)) {
+        return
+      }
+      nodes.push({
+        id: nodeId,
+        label: getLabel(naar.value)
+      })
     })
+
+    return nodes
   }
-  bindings.forEach(({naar}) => {
-    const nodeId = naar.value.replace(/http.?:\/\//, '')
-    if (nodes.find((node) => node.id === nodeId)) {
-      return
-    }
-    nodes.push({
-      id: nodeId,
-      label: getLabel(naar.value)
-    })
-  })
 
-  const edges = [...state.edges]
-  bindings.forEach(({naar, pijl, pijlAndereRichting}) => {
-    const nodeId = naar.value.replace(/http.?:\/\//, '')
-    if (edges.find(({from, to}) => from === id && to === nodeId)) {
-      return
-    }
-    edges.push({
-      from: id,
-      to: nodeId,
-      label: getLabel(pijl ? pijl.value : pijlAndereRichting.value),
-      arrows: pijl && pijl.value ? 'to' : 'from'
+  function edges () {
+    const edges = [...state.edges]
+    bindings.forEach(({naar, pijl, pijlAndereRichting}) => {
+      const nodeId = naar.value.replace(/http.?:\/\//, '')
+      if (edges.find(({from, to}) => from === id && to === nodeId)) {
+        return
+      }
+      edges.push({
+        from: id,
+        to: nodeId,
+        label: getLabel(pijl ? pijl.value : pijlAndereRichting.value),
+        arrows: pijl && pijl.value ? 'to' : 'from'
+      })
     })
-  })
 
-  await commit('SET_NODES', nodes)
-  await commit('SET_EDGES', edges)
+    return edges
+  }
+
+  try {
+    await commit('SET_VISITED', state.last)
+    await commit('SET_NODES', nodes())
+    await commit('SET_EDGES', edges())
+  }
+  catch (e) {
+    await commit('CLEAR_GRAPH')
+    await commit('SET_VISITED', state.last)
+    await commit('SET_NODES', nodes())
+    await commit('SET_EDGES', edges())
+    throw new Error('STORAGE_FULL')
+  }
 }
