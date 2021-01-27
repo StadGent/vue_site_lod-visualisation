@@ -31,6 +31,7 @@ router.beforeEach((to, from, next) => {
   // delay to give assistive technology some time
   setTimeout(function () {
     store.dispatch('setA11yMessage', `pagina ${title ? title : ''} geladen`)
+      .catch((e) => console.error("unable to set a11y message", e))
   }, 200)
 
   next()
