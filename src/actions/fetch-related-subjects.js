@@ -81,9 +81,13 @@ export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
   }
   catch (e) {
     await commit('CLEAR_GRAPH')
-    await commit('SET_VISITED', state.last)
-    await commit('SET_NODES', nodes())
-    await commit('SET_EDGES', edges())
-    throw new Error('STORAGE_FULL')
+    try {
+      await commit('SET_VISITED', state.last)
+      await commit('SET_NODES', nodes())
+      await commit('SET_EDGES', edges())
+    }
+    catch (e) {
+      console.error('cleared graph, but still unable to add nodes', e)
+    }
   }
 }
