@@ -87,6 +87,7 @@ export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
       await commit('SET_EDGES', edges())
     }
     catch (e) {
+      await commit('CLEAR_GRAPH')
       console.error('cleared graph, but still unable to add nodes', e)
     }
   }
