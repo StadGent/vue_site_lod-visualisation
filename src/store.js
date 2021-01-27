@@ -11,6 +11,7 @@ Vue.use(Vuex)
 
 const vuexLocal = new VuexPersistence({
   storage: localforage,
+  asyncStorage: true,
   reducer: ({visited, nodes, edges}) => ({visited, nodes, edges})
 })
 
