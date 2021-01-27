@@ -5,11 +5,12 @@ import { fetchDataSets } from './actions/fetch-data-sets'
 import { fetchDataSet } from './actions/fetch-data-set'
 import { fetchResource } from './actions/fetch-data-resource'
 import { fetchRelatedSubjects } from './actions/fetch-related-subjects'
+import * as localforage from 'localforage'
 
 Vue.use(Vuex)
 
 const vuexLocal = new VuexPersistence({
-  storage: window.localStorage,
+  storage: localforage,
   reducer: ({visited, nodes, edges}) => ({visited, nodes, edges})
 })
 
