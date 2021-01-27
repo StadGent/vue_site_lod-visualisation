@@ -21,12 +21,13 @@ export default new Vuex.Store({
     visited: [],
     nodes: [],
     edges: [],
-    a11yMessage: null
+    a11yMessage: null,
+    last: null
   },
   getters: {
     ids: state => state.visited.map(v => v.id),
-    last: state => state.visited[state.visited.length - 1],
-    lastId: (state, getters) => getters.last?.id,
+    last: state => state.last,
+    lastId: state => state.last?.id,
     getSetById: state => id => state.visited.find(v => v.id === id),
     getSetByIndex: state => index => state.visited[index]
   },
@@ -35,7 +36,7 @@ export default new Vuex.Store({
       state.datasets = data
     },
     SET_DATASET (state, data) {
-      state.visited.push(data)
+      state.last = data
     },
     SET_A11YMESSAGE (state, data) {
       state.a11yMessage = data
@@ -45,6 +46,9 @@ export default new Vuex.Store({
     },
     SET_EDGES (state, data) {
       state.edges = data
+    },
+    SET_VISITED (state, data) {
+      state.visited.push(data)
     },
     CLEAR_GRAPH (state) {
       state.nodes = []
