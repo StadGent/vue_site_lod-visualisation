@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build:qa": "VUE_APP_DIST=qa vue-cli-service build",
     "build": "VUE_APP_SPARQL_ENDPOINT=https://stad.gent/sparql VUE_APP_SUBDOMAIN= vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build:qa": "VUE_APP_DIST=qa vue-cli-service build"
   },
   "dependencies": {
     "@digipolis-gent/modal": "^1.0.2",
@@ -28,23 +28,18 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-object-assign": "^7.2.0",
-    "@vue/cli-plugin-babel": "~4.4.6",
-    "@vue/cli-plugin-eslint": "~4.4.6",
-    "@vue/cli-service": "~4.4.6",
-    "babel-eslint": "^10.0.1",
+    "@vue/cli-plugin-babel": "~4.5.15",
+    "@vue/cli-plugin-eslint": "~4.5.15",
+    "@vue/cli-service": "~4.5.15",
+    "babel-eslint": "^10.1.0",
     "breakpoint-sass": "^2.7.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
     "gent_styleguide": "^4.1.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
     "susy": "^3.0.5",
     "vue-template-compiler": "^2.5.17"
-  },
-  "resolutions": {
-    "google/cheerio/lodash": "^4.17.12",
-    "yasgui-yasr/jquery": "^3.5.0",
-    "yasgui-yasr/jquery-ui": "^1.12.0"
   },
   "eslintConfig": {
     "root": true,
@@ -71,5 +66,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "resolutions": {
+    "google/cheerio/lodash": "^4.17.12",
+    "yasgui-yasr/jquery": "^3.5.0",
+    "yasgui-yasr/jquery-ui": "^1.12.0"
+  }
 }
