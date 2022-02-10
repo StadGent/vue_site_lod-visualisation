@@ -36,7 +36,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "gent_styleguide": "^5.0.12",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "sass-loader": "^8.0.2",
     "susy": "^3.0.5",
     "vue-template-compiler": "^2.5.17"
