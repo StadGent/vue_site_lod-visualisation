@@ -54,8 +54,8 @@
         })
       },
       isSubject(object) {
-        return object.value === `https://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${this.id}`
-          || object.value === `http://${process.env.VUE_APP_SUBDOMAIN}stad.gent/id${this.id}`
+        const regex = `/^http[s]*:\\/\\/stad.gent\\/id(.)*\\/${this.id}(.)*/ig`
+        return regex.match(object.value)
       },
       isUri(object) {
        return object.type === 'uri'
