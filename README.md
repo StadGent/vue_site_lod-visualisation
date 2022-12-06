@@ -1,4 +1,6 @@
-# lod-vis
+# Linked Open Data (LOD) Visualisation
+
+This application provides the subject pages for City of Ghent.
 
 ## Project setup
 ```
