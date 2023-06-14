@@ -23,16 +23,16 @@
 </template>
 
 <script>
-import gentInfo from '../molecules/gent-info'
-import cityLinks from '../molecules/city-links'
-import socialMedia from '../molecules/social-media'
-import partnership from '../molecules/partnership'
+import gentInfo from '../molecules/gent-info.vue';
+import cityLinks from '../molecules/city-links.vue';
+import socialMedia from '../molecules/social-media.vue';
+import partnership from '../molecules/partnership.vue';
 
 export default {
   components: {
     'gent-info': gentInfo,
     'city-links': cityLinks,
-    partnership,
+    'partnership': partnership,
     'social-media': socialMedia
   }
 }

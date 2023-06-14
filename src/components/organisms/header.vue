@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import logo from '../molecules/logo'
-import breadcrumbs from '../molecules/breadcrumbs'
-import menu from '../molecules/menu'
+import logo from '../molecules/logo.vue';
+import breadcrumbs from '../molecules/breadcrumbs.vue';
+import menu from '../molecules/menu.vue';
 
 export default {
-  components: {logo, breadcrumbs, 'v-menu': menu}
-}
+  components: { logo, breadcrumbs, 'v-menu': menu }
+};
 </script>

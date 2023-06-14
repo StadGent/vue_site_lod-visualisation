@@ -6,16 +6,16 @@ export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
     `
     SELECT ?pijl ?pijlInAndereRichting ?naar
     WHERE {
-        {   <${id}> 
-            ?pijl 
-            ?naar 
-            FILTER (isIRI(?naar) && ?pijl != <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>) 
+        {   <${id}>
+            ?pijl
+            ?naar
+            FILTER (isIRI(?naar) && ?pijl != <http://www.w3.org/2000/01/rdf-schema#isDefinedBy>)
         }
-        UNION 
-        { 
+        UNION
+        {
             ?naar ?pijlAndereRichting <${id}uri>
         }
-    } 
+    }
     `
   let formData = new FormData()
   formData.append('query', query)
@@ -35,22 +35,22 @@ export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
   id = id.replace(/http.?:\/\//, '')
 
   function nodes () {
-    const nodes = [...state.nodes]
-    if (!nodes.find((node) => node.id === id)) {
-      nodes.push({
+    const nodes = {...state.nodes}
+    if (!(id in nodes)) {
+      nodes[id] = {
         id: id.replace(/http.?:\/\//, ''),
         label: getTitle(dataset)
-      })
+      };
     }
     bindings.forEach(({naar}) => {
       const nodeId = naar.value.replace(/http.?:\/\//, '')
-      if (nodes.find((node) => node.id === nodeId)) {
+      if (nodeId in nodes) {
         return
       }
-      nodes.push({
+      nodes[nodeId] = {
         id: nodeId,
         label: getLabel(naar.value)
-      })
+      };
     })
 
     return nodes
@@ -60,14 +60,13 @@ export async function fetchRelatedSubjects ({commit, state}, {id, dataset}) {
     const edges = [...state.edges]
     bindings.forEach(({naar, pijl, pijlAndereRichting}) => {
       const nodeId = naar.value.replace(/http.?:\/\//, '')
-      if (edges.find(({from, to}) => from === id && to === nodeId)) {
+      if (edges.find(({source, target}) => source === id && target === nodeId)) {
         return
       }
       edges.push({
-        from: id,
-        to: nodeId,
-        label: getLabel(pijl ? pijl.value : pijlAndereRichting.value),
-        arrows: pijl && pijl.value ? 'to' : 'from'
+        source: pijl && pijl.value ? id: nodeId,
+        target: pijl && pijl.value ? nodeId : id,
+        label: getLabel(pijl ? pijl.value : pijlAndereRichting.value)
       })
     })
 

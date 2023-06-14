@@ -4,6 +4,8 @@ $styleguide-dir: '../../../node_modules/gent_styleguide/build/styleguide';
 
 @import "organisms/dataset";
 @import "organisms/graph";
+@import "../../../node_modules/@triply/yasqe/build/yasqe.min.css";
+@import "../../../node_modules/@triply/yasr/build/yasr.min.css";
 @import "organisms/yasgui";
 @import "transitions";
 

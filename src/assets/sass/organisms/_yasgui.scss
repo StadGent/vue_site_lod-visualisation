@@ -1,9 +1,11 @@
-@include desktop {
-  @include set-layout('width-10', 'offset-1');
+:root {
+  @include desktop {
+    @include set-layout('width-10', 'offset-1');
+  }
 }
 
 #yasgui {
-  font-size: .6rem;
+  font-size: .8rem;
 
   @include desktop {
     @include set-layout('width-10', 'offset-1');
