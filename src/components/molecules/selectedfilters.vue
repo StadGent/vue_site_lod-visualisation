@@ -1,10 +1,12 @@
 <template>
   <div v-if="selectedFilters.length > 0" class="selected-filters">
     <h2>U koos voor:</h2>
-    <template v-for="filter in selectedFilters">
-      <span :key="filter.key" class="tag filter">
+    <template v-for="filter in selectedFilters" :key="filter.key">
+      <span class="tag filter">
         {{ filter.value }}
-        <button @click="clearFilter(filter)"><span class="visually-hidden">Verwijder deze filter</span></button>
+        <button @click="clearFilter(filter)">
+          <span class="visually-hidden">Verwijder deze filter</span>
+        </button>
       </span>
     </template>
     <router-link :to="$route.path">Wis alle filters</router-link>
@@ -25,10 +27,10 @@ export default {
      *
      * @returns {Array}
      */
-    selectedFilters () {
+    selectedFilters() {
       return Object.keys(this.$route.query).reduce((result, key) => {
         if (!this.allowedFilters.includes(key) || !this.$route.query[key]) {
-          return result
+          return result;
         }
 
         // Get checkbox query values
@@ -38,19 +40,19 @@ export default {
               key: `${key}-${i}`,
               value: this.$route.query[key][i],
               filterKey: key
-            })
+            });
           }
-          return result
+          return result;
         }
 
         // Get single value
         result.push({
           key: key,
           value: this.$route.query[key]
-        })
+        });
 
-        return result
-      }, [])
+        return result;
+      }, []);
     }
   },
   methods: {
@@ -59,33 +61,33 @@ export default {
      *
      * @param {Object} filter
      */
-    clearFilter (filter) {
-      let query = Object.assign({}, this.$route.query)
+    clearFilter(filter) {
+      let query = { ...this.$route.query };
 
       // Delete single query value
       if (query[filter.key]) {
-        delete query[filter.key]
+        delete query[filter.key];
       }
 
       // Delete checkbox query value
       else if (filter.filterKey) {
-        const index = query[filter.filterKey].indexOf(filter.value)
+        const index = query[filter.filterKey].indexOf(filter.value);
         if (index !== -1) {
-          query[filter.filterKey].splice(index, 1)
+          query[filter.filterKey].splice(index, 1);
         }
       }
 
       // Reset paging
-      delete query.page
+      delete query.page;
 
       // Force querystring to renew (bug)
-      query.check = ++query.check || 0
+      query.check = ++query.check || 0;
 
       this.$router.push({
         path: `${this.$route.path}#result`,
         query: query
-      })
+      });
     }
   }
-}
+};
 </script>

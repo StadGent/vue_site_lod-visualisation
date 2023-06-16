@@ -3,7 +3,7 @@ import axios from 'axios'
 export const instance = axios.create({
   transformRequest: [
     (data, headers) => {
-      headers.common.Accept = 'application/sparql-results+json'
+      headers.Accept = 'application/sparql-results+json'
       return data
     },
   ]
